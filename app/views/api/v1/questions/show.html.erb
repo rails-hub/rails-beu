@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Question:</b>
+  <%= @question.name %>
+</p>
+
+<p>
+  <b>Is Active:</b>
+  <%= @question.is_active %>
+</p>
+
+<p>
+  <b>Expiry date:</b>
+  <%= @question.expiry_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_question_path(@question) %> |
+<%= link_to 'Back', api_v1_questions_path %>

@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Title:</b>
+  <%= @target_rule.name %>
+</p>
+
+<p>
+  <b>All:</b>
+  <%= @target_rule.all_age %>
+</p>
+
+<p>
+  <b>Age category:</b>
+  <%= @target_rule.age_category %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @target_rule.gender %>
+</p>
+
+<p>
+  <b>Birthday:</b>
+  <%= @target_rule.birthday %>
+</p>
+
+<p>
+  <b>Past customer:</b>
+  <%= @target_rule.past_customer %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @target_rule.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @target_rule.end_date %>
+</p>
+
+<p>
+  <b>Deal:</b>
+  <%= @target_rule.deal %>
+</p>
+
+
+<%= link_to 'Edit', edit_target_rule_path(@target_rule) %> |
+<%= link_to 'Back', target_rules_path %>

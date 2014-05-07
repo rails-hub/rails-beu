@@ -1,0 +1,31 @@
+<h1>Listing deals_wizards</h1>
+
+<table>
+  <tr>
+    <th>Fixed offer</th>
+    <th>Buy units</th>
+    <th>Buy offer</th>
+    <th>Spend amount</th>
+    <th>Spend offer</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @deals_wizards.each do |deals_wizard| %>
+  <tr>
+    <td><%= deals_wizard.fixed_offer %></td>
+    <td><%= deals_wizard.buy_units %></td>
+    <td><%= deals_wizard.buy_offer %></td>
+    <td><%= deals_wizard.spend_amount %></td>
+    <td><%= deals_wizard.spend_offer %></td>
+    <td><%= link_to 'Show', deals_wizard %></td>
+    <td><%= link_to 'Edit', edit_deals_wizard_path(deals_wizard) %></td>
+    <td><%= link_to 'Destroy', deals_wizard, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Deals wizard', new_deals_wizard_path %>

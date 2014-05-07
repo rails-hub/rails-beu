@@ -1,0 +1,63 @@
+
+<%content_for :title, 'beam-e-up | First Login'%>
+<%content_for :keywords, 'first login' %>
+<%content_for :description, 'welcome to beam-e-up' %>
+
+<script type="text/javascript">
+   $(document).ready(function(){
+        ////Switch::Zones List
+        var strZoneId = "";
+        var strUserId = "";
+        $("#switch_zones").change(function () {
+            $("#switch_zones option:selected").each(function () {
+                strZoneId = $(this).val();
+            });
+            if(strZoneId!='')
+                if(document.location.toString().split('/')[3] != "switch?zone="+strZoneId)
+                    document.location="/switch?zone="+strZoneId;
+
+        })
+        .change();
+
+       $("#aoutlogin").click(function(){
+           $("#switch_users option:selected").each(function () {
+               strUserId = $(this).val();
+           });
+          if(strZoneId!='')
+          if(strUserId!='')
+           document.location="/switch?zone="+strZoneId+"&user="+strUserId;
+           else {
+           //alert("select a retailer.");
+           return false;
+           }
+       });
+    });
+</script>
+<div class="content">
+  <div class="panel" style="width:600px; margin:0 auto;">
+    <div class="head">Welcome</div>
+
+    <div class="inside textAlignCenter">
+      Select Retailer:<br><br>
+      <div style="width:220px; display:inline-block; height:20px;">
+        <div id="uniform-zones">
+           
+            <%=select_tag "switch_zones", options_for_select(Admin::Zone.all.collect{ |u| [u.name, u.id] },params[:zone]),prompt: 'Select a Zone',style: "opacity:1;" %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <div style="width:220px; display:inline-block; height:20px;">
+        <div id="uniform-users">
+          <%=select_tag "switch_users", options_for_select(User.find( :all, :joins => :user_zones,:conditions => { :user_zones => { :zone_id => params[:zone] } }).collect{ |u| [u.business_name, u.id] }),prompt: 'Select a Retailer',style: "opacity:1;" %>
+        </div>
+      </div>
+      <br/>
+      <br/>
+      <a class="edgyBlueButton nomargin" id="aoutlogin" href="#">Login</a>
+    </div>
+
+
+  </div>
+</div>
+

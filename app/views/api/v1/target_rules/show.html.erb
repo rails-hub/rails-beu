@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <b>Name:</b>
+  <%= @api_v1_target_rule.name %>
+</p>
+
+<p>
+  <b>All allowed?</b>
+  <%= @api_v1_target_rule.all %>
+</p>
+
+<p>
+  <b>Allowed Ages:</b>
+  <%= get_age_categories(@api_v1_target_rule) %>
+</p>
+
+
+<p>
+  <b>Gender:</b>
+  <%= get_genders(@api_v1_target_rule) %>
+</p>
+
+
+<%#= link_to 'Edit', edit_api_v1_target_rule_path(@api_v1_target_rule) %> |
+<%= link_to 'Back', api_v1_target_rules_path %>

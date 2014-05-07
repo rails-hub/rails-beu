@@ -1,0 +1,61 @@
+<script type="text/javascript">
+  $(function() {
+      $(".edgyBlueButton.noclass").click(function(){
+       $("#dialog-confirm").dialog({
+           resizable: false,
+           height:170,
+           modal: true,
+           buttons: {
+               "Dismiss": function() {
+                   $( this ).dialog( "close" );
+               }}});
+     return false;
+      });
+  })
+</script>
+<%  content_for :title, 'beam-e-up | Edit Zones' %>
+<%  content_for :keywords, '' %>
+<%  content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+<%#= render 'index' %>
+    <div class="clear"></div>
+<%#= render 'form' %>
+    <div class="panel" >
+      <strong> &nbsp;&nbsp;&nbsp; <%=@admin_zone.name%></strong>
+      <% if params[:linkunlink]!='link' %>
+        <% @admin_hotspots.each do |admin_hotspot| %>
+          <%= render :partial => 'unlinkhotspot', :locals=>{:admin_hotspot => admin_hotspot,:zone_id=>0} %>
+        <%end%>
+          </div>
+          <div class="floatRight">
+            <%= link_to 'Link New Hotspot', edit_admin_zone_path(@admin_zone.id, :linkunlink => "link") ,class:
+
+                    if @admin_allhotspots.length > 0
+                      "edgyBlueButton"
+                    else
+                      "edgyBlueButton noclass"
+                    end %>
+
+          </div>
+
+        <%  else %>
+          <% @admin_allhotspots.each do |admin_hotspot| %>
+            <%  admin_hotspot.zone_id=@admin_zone.id %>
+            <%= render :partial => 'linknewhotspot', :locals=>{:admin_hotspot => admin_hotspot,:zone_id=>@admin_zone.id} %>
+          <%end%>
+        <%end%>
+        <br/>
+
+
+      <div class="clear"></div>
+
+      <!-- Content ends here-->
+    </div>
+  </div>
+<div id="dialog-confirm" title="No hotspot found!" style="display:none">
+  <p>Please add hotspot in the system to make sure zone is linked properly with it.</p>
+</div>

@@ -1,0 +1,24 @@
+    <%= form_for(@admin_classified) do |f| %>
+        <%= render 'partials/error_messages', :object => f.object %>
+        <div class="panel">
+          <div class="head"><h3>Add a Classified</h3></div>
+          <div class="inside">
+            <br>
+            <label for="classifieds" class="static" style="vertical-align:top;">Category:</label>
+            <%= f.collection_select :classified_category_id, Admin::ClassifiedCategory.all, :id, :name %>
+            <%#*<select id="admin_classified_classified_category_id" name="admin_classified[classified_category_id]" style="opacity: 0; ">%>
+                <%#*<option value="1">Real Estate</option>%>
+                <%#*<option value="2">Help Wanted</option>%>
+                <%#*<option value="3">Local Events</option>%>
+                <%#*<option value="4">Items for Sale</option>%>
+                <%#*<option value="5">Office Space</option>%>
+            <%#*</select>%>
+            <br>
+            <label for="classifieds" class="static" style="vertical-align:top;">Classifieds:</label>
+            <%= f.text_area :name,:size=>'98x5' %><br><br>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <%= f.submit 'Submit', :class => "edgyBlueButton nomargin floatRight" %>
+        <div class="clear"></div>
+    <% end %>

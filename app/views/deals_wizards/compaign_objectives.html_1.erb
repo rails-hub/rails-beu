@@ -1,0 +1,37 @@
+
+<%content_for :title, 'beam-e-up | Deal Wizard - 1'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+  <div class="content">
+   <%= render :partial=> 'partials/main_menu' %>
+    <div class="contentInside">
+      <!-- Content goes here-->
+      <div class="panel">
+        <div class="head"><h3>Deal Wizard</h3></div>
+        <%= form_tag(set_deals_wizards_path, :method => :get) do |f| %>
+        <div class="inside">
+          What is your objective for this campaign?<br /><br />
+          <%= hidden_field_tag :deal_id, params[:deal_id] %>
+          <% @compaign_objectives.each do |objective| %>
+          <% if selected_objective(@compaign_objectives_ids, objective)%>
+            <%= check_box_tag "compaign_objectives[#{objective.id}]",{} , {:checked=>true} %>
+          <%else%>
+          <%= check_box_tag "compaign_objectives[#{objective.id}]" %>
+          <%end%>
+
+          <%=  label_tag "#{objective.name}" %><br />
+          <% end %>
+        </div>
+      </div>
+      
+      <input type="button" value="Back" name="commit" class="nextbutton nomargin" onClick="window.history.go(-1)" ></input>
+      <div class="floatRight">
+        <%= submit_tag 'Next', :class=>"nextbutton nomargin" %>
+      </div>
+      <%end%>
+      <div class="clear"></div>
+      <!-- Content ends here-->
+    </div>
+  </div>
+

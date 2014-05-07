@@ -1,0 +1,104 @@
+
+
+<%content_for :title, 'beam-e-up | Change Subscription'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+
+    <%= form_for(@subscription_detail, :url=> @url) do |f| %>
+      <% if @subscription_detail.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@subscription_detail.errors.count, "error") %> prohibited this Subscription details from being saved:</h2>
+
+          <ul>
+            <% @subscription_detail.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="panel">
+        <div class="head"><h3>Change Subscription</h3></div>
+        <div class="inside">
+          Choose from One of the following Subscription Plans:<br /><br />
+          <div >
+  <%#*<h4 class="q1"><strong>Plan</strong></h4>&nbsp;<h4 class="q1"><strong>Pricing</strong></h4><br />%>
+            <table class="subscription_table" id="full" style="display:none">
+              <thead>
+                <tr>
+                  <td><h4><strong>Plan</strong></h4></td>
+                  <td><h4><strong>Pricing</strong></h4></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="padding-bottom: 20px;display: block;"></tr>
+                <% Plan.find_all_by_plan_type('f').each do |plan| %>
+                  <tr>
+                    <td>
+                      <%= f.radio_button :plan_id, plan.id %><label for="platinum" ><%= "#{plan.title} - #{plan.compaigns_per_month} #{'campaigns per month' if plan.compaigns_per_month!= 'Unlimited'}" %></label>
+                    </td>
+                    <td>
+                      <label for="<%=  plan.title %>" class="q1"  >
+                        $<%= plan.price %> per month</label>
+                    </td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+
+            <table class="subscription_table" id="self">
+              <thead>
+                <tr>
+                  <td><h4><strong>Plan</strong></h4></td>
+                  <td><h4><strong>Pricing</strong></h4></td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr style="padding-bottom: 20px;display: block;"></tr>
+                <% Plan.find_all_by_plan_type('s').each do |plan| %>
+                  <tr>
+                    <td>
+                      <%= f.radio_button :plan_id, plan.id %><label for="platinum" ><%= "#{plan.title} - #{plan.compaigns_per_month} #{'campaigns per month' if plan.compaigns_per_month!= 'Unlimited'}" %></label>
+                    </td>
+                    <td>
+                      <label for="<%=  plan.title %>" class="q1"  >
+                        $<%= plan.price %> per month</label>
+                    </td>
+                  </tr>
+                <%end%>
+              </tbody>
+            </table>
+
+
+          </div>
+
+
+          <div class="clear"></div><br />
+          <div class="divider"></div><br />
+          <%= f.radio_button :service_type, 'self',:id=>'self' ,:checked=>true%><label for="self">Self Service</label>&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= f.radio_button :service_type, 'full' ,:id=>'full' %><label for="full">Full Service</label><br />
+        </div>
+      </div>
+      <div class="clear"></div>
+      <%= f.hidden_field :user_id, :value=> "#{current_user.id if current_user.present?}" %>
+      <%= link_to 'Back', user_path(current_user), :class => "edgyBlueButton nomargin" %>
+      <span class="floatRight"><%= f.submit 'Save', :class => "edgyBlueButton nomargin link_button" %></span>
+
+    <% end %>
+    <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+
+<script type="text/javascript">
+   alert('true');
+  $(document).onload(function() {
+    $('#plan_'+<%=@subscription_detail.plan_id%>).click();
+    alert('true');
+  });
+</script>

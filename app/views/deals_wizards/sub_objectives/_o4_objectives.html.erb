@@ -1,0 +1,24 @@
+
+<%= radio_button_tag '4[0]','1', true,:class => "data_restrict" %><h3>Gift/Seasonal</h3><br /><br />
+
+    <div id="d_4_0_1" class="show toggle_d">
+      <%= radio_button_tag '4[1]','1' %> Come back and celebrate &nbsp;<%= text_field_tag '4[1_1][1]'%> with us and receive &nbsp;<%= text_field_tag '4[1_1][2]'%> % off your purchase storewide!<br /><br/>
+      <%= radio_button_tag '4[1]','2' %> Come back and celebrate &nbsp;<%= text_field_tag '4[1_2][1]'%> with us. Spend $ &nbsp;<%= text_field_tag '4[1_2][2]'%> or more in store and receive $ &nbsp;<%= text_field_tag '4[1_2][3]'%> off your purchase!<br /><br/>
+      <%= radio_button_tag '4[1]','3' %> Come back celebrate &nbsp;<%= text_field_tag '4[1_3][1]'%> with us. Spend $ &nbsp;<%= text_field_tag '4[1_3][2]'%> or more in store and receive  &nbsp;<%= text_field_tag '4[1_3][3]'%> % off your purchase!<br /><br/>
+      <%= radio_button_tag '4[1]','4' %> Purchase &nbsp;<%= text_field_tag '4[1_4][1]'%> and receive &nbsp;<%= text_field_tag '4[1_4][2]'%> % off!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '4[0]','2', false,:class => "data_restrict" %><h3>Promotional - Storewide</h3><br /><br />
+
+    <div id="d_4_0_2" class="hide toggle_d">
+      <%= radio_button_tag '4[2]','1' %> Present this coupon in store and receive a &nbsp;<%= text_field_tag '4[2_1]'%> !<br /><br/>
+      <%= radio_button_tag '4[2]','2' %> Spend $ &nbsp;<%= text_field_tag '4[2_2][1]'%> in store and receive a &nbsp;<%= text_field_tag '4[2_2][2]'%> with your purchase!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '4[0]','3', false,:class => "data_restrict" %><h3>Past Customer - Storewide </h3><br /><br />
+
+    <div id="d_4_0_3" class="hide toggle_d">
+      <%= radio_button_tag '4[3]','1' %> As thanks for your past business, we’d like to offer you &nbsp;<%= text_field_tag '4[3_1][1]'%> % off your purchase on your next visit!<br /><br/>
+      <%= radio_button_tag '4[3]','2' %> Exclusive deal for past customers. Spend $ &nbsp;<%= text_field_tag '4[3_2][1]'%> or more and receive $ &nbsp;<%= text_field_tag '4[3_2][2]'%> off your purchase!<br /><br/>
+      <%= radio_button_tag '4[3]','3' %> Exclusive deal for past customers. Spend $ &nbsp;<%= text_field_tag '4[3_3][1]'%> or more and receive &nbsp;<%= text_field_tag '4[3_3][2]'%> % off your purchase!<br /><br/>
+    </div>

@@ -1,0 +1,15 @@
+<%  content_for :title, 'beam-e-up | Zones' %>
+<%  content_for :keywords, '' %>
+<%  content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <%= render 'index' %>
+    <%= link_to 'Add Hotspot', new_admin_hotspot_path, :class => "edgyBlueButton nomargin floatRight" %>
+    <div class="clear"></div>
+
+    <!-- Content ends here-->
+  </div>
+</div>

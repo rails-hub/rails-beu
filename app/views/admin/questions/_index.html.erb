@@ -1,0 +1,23 @@
+<div class="panel">
+  <div class="head"><h3>Active Questions</h3></div>
+  <div class="inside nopadding">
+    <table class="data">
+      <tbody>
+      <% if @admin_questions.length>0 %>
+      <% i=1 %>
+      <% @admin_questions.each do |admin_question| %>
+      <tr>
+        <td><strong>Question <%= i %>: </strong><%= admin_question.name %></td>
+        <td class="textAlignRight"> <%= link_to 'Edit', edit_admin_question_path(admin_question), class: "edgyBlueButton" %><%= link_to 'Delete', admin_question, class: "edgyBlueButton", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+          <% i+=1 %>
+      <% end %>
+          <%else%>
+          &nbsp;&nbsp;&nbsp;&nbsp; <%= "There is no active question in the system. Please add one to get started." %>
+          <% end %>
+          </tbody></table>
+    <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+</div>

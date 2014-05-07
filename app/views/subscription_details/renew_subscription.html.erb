@@ -1,0 +1,59 @@
+<%content_for :title, 'beam-e-up | Subscription and Payment'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="panel">
+      <div class="head"><h3>Subscription and Payment</h3></div>
+      <div class="inside">
+        <div class="q borderRight" style="width:300px; padding-right:20px;">
+          <br />
+          <h3>Subscribe</h3>
+          <form action="#" method="post">
+            <label class="static">Subscription Plan: </label><strong><%= display_value(@plan.title) %></strong><br />
+            <label class="static">Subscription Expiry: </label><strong><%= display_value(@plan.expiry) %></strong><br /><br />
+            Choose the Subscription Term:<br />
+            <div class="clear"></div>
+            <div style="width:270px;">
+              <select name="term" id="term">
+                <option>Subscribe 1 month - $299</option>
+              </select><br />
+            </div>
+            <label class="static">Balance Due: </label><strong>$299</strong><br /><br /><br />
+            <%= link_to 'Change Subscription Plan', edit_subscription_detail_url(@user.id), :class => "edgyBlueButton  nomargin"%>
+            <%#*<a class="edgyBlueButton nomargin" href="#">Change Subscription Plan</a>%>
+            <br /><br />
+          </form>
+        </div>
+
+        <div class="q" style="width:560px; margin-top:-10px; margin-right:0px;">
+          <br />
+          <h3>Payment Options</h3>
+          <div class="q" style="width:320px;">
+            <h3>Credit Card</h3>
+            <label class="static" for="name">Name: </label><input type="text" name="name" id="name" style="width:150px;"/><br /><br />
+            <label class="static" for="cardNumber">Card Number: </label><input type="text" name="cardNumber" id="cardNumber" style="width:150px;"/><br /><br />
+            <label class="static" for="expireDate">Expire Date: </label><input type="text" name="expireDate" id="expireDate" style="width:150px;"/>
+          </div>
+          <div class="q nomargin" style="width:180px;">
+            <h3>PayPal</h3>
+            <a href="#"><img src="images/paypal.png" width="143" height="60" alt="PayPal"/></a>
+          </div>
+
+          <div class="clear"></div><br />
+          <span style="margin-top:10px; display:block;"><a class="edgyBlueButton nomargin" href="#">Submit</a></span><br />
+        </div>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+
+    <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+

@@ -1,0 +1,32 @@
+<% content_for :title, 'beam-e-up | Archive Contents' %>
+<% content_for :keywords, '' %>
+<% content_for :description, '' %>
+
+
+
+<div class="content">
+  <%= render :partial => 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <%= form_tag(url: archive_contents_path) do %>
+        <div class="panel">
+          <% @deals.each do |deal| %>
+              <div class="archive-image-preview">
+                <%= render :partial => 'deals/preview', :locals => {:deal => deal, :tmp_img => "", :js => true, :archive=>true} %>
+                <%= radio_button_tag :deal_id, deal.id if local_assigns[:archive] %>
+              </div>
+          <% end %>
+          <div class="clear"></div>
+          <!-- Content ends here-->
+        </div>
+        <div class="floatRight">
+          <%= submit_tag 'Next', :class => "nextbutton nomargin cookie_setter", :style => 'width:70px' %>
+        </div>
+        <div class="clear"></div>
+    <% end %>
+  </div>
+</div>
+
+<script type="text/javascript">
+  $("input:radio:first").attr('checked', true);
+</script>

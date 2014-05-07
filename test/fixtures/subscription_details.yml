@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  plan: 
+  user: 
+  status: MyString
+  expiry: 2012-10-08 22:47:11
+  balance_due: 1.5
+
+two:
+  plan: 
+  user: 
+  status: MyString
+  expiry: 2012-10-08 22:47:11
+  balance_due: 1.5

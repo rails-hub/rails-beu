@@ -1,0 +1,38 @@
+<%#content_for :title, 'beam-e-up | Login'%>
+<%#content_for :keywords, 'login' %>
+<%#content_for :description, 'login to connect to beem e up' %>
+
+
+
+
+
+<div style="text-align: center;width: 116px;margin-left:auto;margin-right: auto;"><br/><br/><br/>
+
+  <div style="text-align: center;margin-left:auto;margin-right: auto;">
+    <% flash[:notice]= notice %>
+    <% flash[:error]= alert %>
+  </div>
+  <img src="/images/logo.png" width="116" height="67" alt="Beam-e-up" align="middle"/><br/><br/>
+</div>
+<div class="content textAlignCenter">
+
+
+  <div class="panel" style="width:450px; margin:0 auto;">
+    <h2>Change your password</h2>
+
+    <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {:method => :put}) do |f| %>
+        <%= devise_error_messages! %>
+        <%= f.hidden_field :reset_password_token %>
+
+        <div><%= f.label :password, "New password" %>
+          <br/>
+          <%= f.password_field :password, :class => 'e_field' %></div>
+
+        <div><%= f.label :password_confirmation, "Confirm new password" %>
+          <br/>
+          <%= f.password_field :password_confirmation, :class => 'e_field' %></div>
+
+        <div><%= f.submit "Change my password" %></div>
+    <% end %>
+  </div>
+</div>

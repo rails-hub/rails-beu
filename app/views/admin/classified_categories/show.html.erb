@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_classified_category.name %>
+</p>
+
+<p>
+  <b>Parent category:</b>
+  <%= @admin_classified_category.parent_category_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_classified_category_path(@admin_classified_category) %> |
+<%= link_to 'Back', admin_classified_categories_path %>

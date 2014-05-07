@@ -1,0 +1,25 @@
+<%= form_for(@redeemed_deal) do |f| %>
+  <% if @redeemed_deal.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@redeemed_deal.errors.count, "error") %> prohibited this redeemed_deal from being saved:</h2>
+
+      <ul>
+      <% @redeemed_deal.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :deal_id %><br />
+    <%= f.number_field :deal_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,17 @@
+%div{:style => "display:none;"}
+  %div{:id=> "upload_retailer_div", :class=> "upload_box"}
+    %br
+    %h3 Upload Retailer Image
+
+    = form_for @tmp_user, :url => temp_users_path, :html => {:method=>:post, :multipart => true }, :remote=> true do |f|
+      = f.label :retailer_image , 'Retailer Image'
+      %br
+      %br
+      = f.file_field :retailer_image
+      %br
+      (only images jpeg/gif/png)
+      %br
+      %br
+      = f.hidden_field :session_id, :value=> session[:session_id]
+      = f.submit 'Upload', :class=>'edgyBlueButton' , :onclick=>""
+      %br

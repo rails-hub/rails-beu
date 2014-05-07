@@ -1,0 +1,14 @@
+#login-logo {
+	text-align: center;
+}
+.panel {
+	color: #7d7d7d !important;
+}
+.edgyBlueButton 
+{
+	color: white;
+}
+body, html { height: 100%; }
+#header{width: 960px !important; margin: auto; margin-bottom: 10px;}
+#header .content { width: 960px !important; margin: auto; }
+.panel .inside { display: block; clear: both; }

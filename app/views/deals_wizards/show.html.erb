@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fixed offer:</b>
+  <%= @deals_wizard.fixed_offer %>
+</p>
+
+<p>
+  <b>Buy units:</b>
+  <%= @deals_wizard.buy_units %>
+</p>
+
+<p>
+  <b>Buy offer:</b>
+  <%= @deals_wizard.buy_offer %>
+</p>
+
+<p>
+  <b>Spend amount:</b>
+  <%= @deals_wizard.spend_amount %>
+</p>
+
+<p>
+  <b>Spend offer:</b>
+  <%= @deals_wizard.spend_offer %>
+</p>
+
+
+<%= link_to 'Edit', edit_deals_wizard_path(@deals_wizard) %> |
+<%= link_to 'Back', deals_wizards_path %>

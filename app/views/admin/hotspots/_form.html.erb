@@ -1,0 +1,29 @@
+<%= form_for(@admin_hotspot) do |f| %>
+  <% if @admin_hotspot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_hotspot.errors.count, "error") %> prohibited this admin_hotspot from being saved:</h2>
+
+      <ul>
+      <% @admin_hotspot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field" style='display: inline-block'>
+    <%= f.label :name %><br />
+    <%= f.text_field :name ,style: "width:250px;"%>
+  </div>
+  <div class="field" style='display: inline-block'>
+    <%= f.label :address %><br />
+    <%= f.text_field :address ,style: "width:250px;"%>
+  </div>
+  <div class="field" style='display: inline-block'>
+    <%#= f.label :zone_id %><br />
+    <%= f.hidden_field :zone_id ,style: "width:250px;", :value=>0%>
+    <%= f.hidden_field :called_by ,style: "width:250px;", :value=>'update'%>
+  </div>
+   <div class="clear"></div>
+    <%= f.submit 'Submit', :class => "edgyBlueButton nomargin floatLeft" %> <div class="clear"></div>
+<% end %>

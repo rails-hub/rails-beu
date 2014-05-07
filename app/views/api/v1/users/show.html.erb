@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Dob:</b>
+  <%= @user.dob %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @user.gender %>
+</p>
+
+<p>
+  <b>Mobile:</b>
+  <%= @user.mobile %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<p>
+  <b>Udid:</b>
+  <%= @user.udid %>
+</p>
+
+<p>
+  <b>Device type:</b>
+  <%= @user.device_type %>
+</p>
+
+<p>
+  <b>Notification key:</b>
+  <%= @user.notification_key %>
+</p>
+
+<p>
+  <b>Token key:</b>
+  <%= @user.token_key %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_user_path(@user) %> |
+<%= link_to 'Back', api_v1_users_path %>

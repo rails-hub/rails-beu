@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <title>
+    <%= content_for?(:title) ? content_for(:title) : 'beam-e-up' %>
+  </title>
+  <meta name="keywords" content="<%= content_for?(:keywords) ? content_for(:keywords) : '' %>" />
+  <meta name="description" content="<%= content_for?(:description) ? content_for(:description) : '' %>" />
+  <meta http-equiv="X-UA-Compatible" content="IE=7,IE=9" >
+  <%= render 'partials/shared_layout' %>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/style", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/uniform.default", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/public", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/core", :media => "all" %>
+  <%= stylesheet_link_tag    "/jquery-ui-1.9.1/css/ui-lightness/jquery-ui-1.9.1.custom", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/validationEngine.jquery", :media => "all" %>
+  <!--[if IE]>
+  <%= stylesheet_link_tag    "/stylesheets/ie7", :media => "all" %>
+  <![endif]-->
+
+  <%= javascript_include_tag "application" %>
+  
+  <%#= javascript_include_tag "/javascripts/jquery-ui-1.8.21.custom.min.js" %>
+  <%#= javascript_include_tag "/jquery-ui-1.9.1/js/jquery-1.8.2.js" %>
+  <%#= javascript_include_tag "/jquery-ui-1.9.1/js/jquery-ui-1.9.1.custom.js" %>
+  <%#= javascript_include_tag "/jquery-ui-1.9.1/js/jquery.ui.resizable.js" %>
+  <%#= javascript_include_tag "/javascripts/rails.js" %>
+  <%= javascript_include_tag "/javascripts/jquery.uniform.js" %>
+  <%= javascript_include_tag "/javascripts/colorpicker/colorpicker.js" %>
+  <%= javascript_include_tag "/javascripts/colorpicker/jscolor.js" %>
+  
+ 
+  <%= javascript_include_tag "/javascripts/colorbox/jquery.colorbox.js" %>
+
+
+  <%= stylesheet_link_tag    "/stylesheets/jquery.validate", :media => "all" %>
+  <%= javascript_include_tag "/javascripts/jquery.validate" %>
+  <%= javascript_include_tag "/javascripts/jquery.validation.functions" %>
+  <%= javascript_include_tag "/javascripts/jquery.validationEngine-en.js" %>
+  <%= javascript_include_tag "/javascripts/jquery.validationEngine.js" %>
+  <%= javascript_include_tag "/javascripts/moment.min.js" %>
+
+  <%= javascript_include_tag "/javascripts/public.js" %>
+  <%= javascript_include_tag "/javascripts/main_application.js" %>
+  <%= javascript_include_tag "/javascripts/shared.js" %>
+  
+
+   <%= csrf_meta_tags %>
+</head>
+<body>
+  <script type="text/javascript">
+    
+  $(document).ready(function(){
+  $("form select, input:checkbox, input:radio, input:file").uniform();
+  });
+
+</script>
+
+  <%#*<div style="background-color: red; color: white; font-weight:  bold;">%>
+  <%#*<p class="notice">%>
+      <%#= notice %>
+  <%#*</p>%>
+
+<%#*<p class="alert">%>
+    <%#= alert %>
+<%#*</p>%>
+  <%#*</div>%>
+
+
+<div id="wrapper">
+<% if current_user %>
+  <div id="header">
+    <div class="content">
+      <a href="/"  title="Home" class="logo">beam-e-up</a>
+      <div class="userMenu">
+        Welcome,
+        <a class="roundBlueButton" href="<%= user_url(:id => current_user.id) %>" title="My Account">
+          <!--[if !IE]> -->
+          <img src="/images/icons/user.png" width="15" height="14" alt="User"/>
+          <!-- <![endif]-->
+          <%=  current_user.username%>
+        </a>
+        
+        <%= link_to 'Logout', destroy_user_session_path, :method => :delete, :class=>'roundGreyButton' %>
+      </div>
+
+      <div class="clear"></div>
+    </div>
+
+  </div><!-- #header-->
+<%end%>
+  <div id="content">
+
+    <div id="flash_c"><%= render :partial => 'partials/flashes' %></div>
+    
+    <%= yield %>
+  
+  </div> <!-- content id div end -->
+
+  <div id="footer">
+    <div class="content">
+      <%if current_user%>
+       beam-e-up. All rights Reserved &copy; 2013.
+      <%else%>
+       <div class="textAlignCenter">beam-e-up. All rights Reserved &copy; 2013.</div>
+      <%end%>
+</div>
+</div>
+
+</body>
+</html>

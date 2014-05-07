@@ -1,0 +1,25 @@
+<%= form_for([:api, :v1, @store_category]) do |f| %>
+  <% if @store_category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@store_category.errors.count, "error") %> prohibited this store_category from being saved:</h2>
+
+      <ul>
+      <% @store_category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :store_id %><br />
+    <%= f.number_field :store_id %>
+  </div>
+  <div class="field">
+    <%= f.label :category_id %><br />
+    <%= f.number_field :category_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

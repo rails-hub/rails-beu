@@ -1,0 +1,39 @@
+<h1>End USERS</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Dob</th>
+    <th>Gender</th>
+    <th>Mobile</th>
+    <th>Email</th>
+    <th>Udid</th>
+    <th>Device type</th>
+    <th>Notification key</th>
+    <th>Token key</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @users.each do |user| %>
+  <tr>
+    <td><%= user.name %></td>
+    <td><%= user.dob %></td>
+    <td><%= user.gender %></td>
+    <td><%= user.mobile %></td>
+    <td><%= user.email %></td>
+    <td><%= user.udid %></td>
+    <td><%= user.device_type %></td>
+    <td><%= user.notification_key %></td>
+    <td><%= user.token_key %></td>
+    <td><%= link_to 'Show', api_v1_user_path(user) %></td>
+    <td><%= link_to 'Edit', edit_api_v1_user_path(user) %></td>
+    <td><%= link_to 'Destroy', api_v1_user_path(user), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User', new_api_v1_user_path %>

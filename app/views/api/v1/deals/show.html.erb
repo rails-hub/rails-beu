@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @deal.description %>
+</p>
+
+<p>
+  <b>Coupon no:</b>
+  <%= @deal.coupon_no %>
+</p>
+
+<p>
+  <b>Redemption code:</b>
+  <%= @deal.redemption_code %>
+</p>
+
+<p>
+  <b>Value:</b>
+  <%= @deal.value %>
+</p>
+
+<p>
+  <b>Image url:</b>
+  <%= @deal.image_url %>
+</p>
+
+<p>
+  <b>Item name:</b>
+  <%= @deal.item_name %>
+</p>
+
+<p>
+  <b>Store:</b>
+  <%= @deal.store_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_deal_path(@deal) %> |
+<%= link_to 'Back', api_v1_deals_path %>

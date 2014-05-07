@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @category.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @category.description %>
+</p>
+
+<p>
+  <b>Logo url:</b>
+  <%= @category.logo_url %>
+</p>
+
+<p>
+  <b>Rule:</b>
+  <%= @category.target_rule_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_category_path(@category) %> |
+<%= link_to 'Back', api_v1_categories_path %>

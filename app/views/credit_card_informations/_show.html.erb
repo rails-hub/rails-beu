@@ -1,0 +1,24 @@
+<p>
+  <b>Full Name:</b>
+  <%= @credit_card_information.full_name %>
+</p>
+
+<p>
+  <b>Card number:</b>
+  <%= mask @credit_card_information.card_number %>
+</p>
+
+<p>
+  <b>Expiry date:</b>
+  <%= @credit_card_information.expiry_date.try(:strftime,"%Y-%m") if @credit_card_information.expiry_date %>
+</p>
+
+<%#*<p>%>
+  <%#*<b>User:</b>%>
+  <%#= @credit_card_information.user_id %>
+<%#*</p>%>
+
+<%#*<p>%>
+  <%#*<b>Response:</b>%>
+  <%#= @credit_card_information.response %>
+<%#*</p>%>

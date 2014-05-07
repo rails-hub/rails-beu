@@ -1,0 +1,82 @@
+<script type="text/javascript">
+$(window).load(function(){
+    $('#rdoself').trigger('click');
+    $('#rdoself').parent().trigger('click');
+    $('#plan_9').trigger('click');
+    $('#plan_9').parent().trigger('click');
+
+});
+</script>
+<script type="text/javascript">
+  $(function() {
+    $('#rdoself').click();
+    $('#rdoself').parent().click();
+    $('#plan_9').click();
+    $('#plan_9').parent().click();
+
+
+    // default values
+    $("#campPerMonth").html("Unlimited");
+
+    $('#plan_9').click(function (){
+      $('#subPlan').html("Platinum");
+      $('#campPerMonth').html("Unlimited");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("1099");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("999");
+      }
+    })
+
+    $('#plan_10').click(function (){
+      $('#subPlan').html("Gold");
+      $('#campPerMonth').html("15");
+
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("569");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("499");
+      }
+
+    })
+
+    $('#plan_11').click(function (){
+      $('#subPlan').html("Silver");
+      $('#campPerMonth').html("10");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("449");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("399");
+      }
+    })
+    $('#plan_12').click(function (){
+      $('#subPlan').html("Bronze");
+      $('#campPerMonth').html("5");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("349");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("299");
+      }
+    })
+
+
+  });
+</script>
+<%  if current_user.role_id==Role::ADMIN_USER_ID %>
+<%= render 'form', page: 'new', ab: current_user %>
+<%else%>
+<%= render 'retailer_form' %>
+<%end%>
+

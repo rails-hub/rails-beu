@@ -1,0 +1,39 @@
+<h1>Listing target_rules</h1>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>All</th>
+    <th>Age category</th>
+    <th>Gender</th>
+    <th>Birthday</th>
+    <th>Past customer</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Deal</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @target_rules.each do |target_rule| %>
+  <tr>
+    <td><%= target_rule.title %></td>
+    <td><%= target_rule.all %></td>
+    <td><%= target_rule.age_category %></td>
+    <td><%= target_rule.gender %></td>
+    <td><%= target_rule.birthday %></td>
+    <td><%= target_rule.past_customer %></td>
+    <td><%= target_rule.start_date %></td>
+    <td><%= target_rule.end_date %></td>
+    <td><%= target_rule.deal %></td>
+    <td><%= link_to 'Show', target_rule %></td>
+    <td><%= link_to 'Edit', edit_target_rule_path(target_rule) %></td>
+    <td><%= link_to 'Destroy', target_rule, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Target rule', new_target_rule_path %>

@@ -1,0 +1,26 @@
+
+<%content_for :title, 'beam-e-up | First Login'%>
+<%content_for :keywords, 'first login' %>
+<%content_for :description, 'welcome to beam-e-up' %>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("form select, input:checkbox, input:radio, input:file").uniform();
+    });
+
+</script>
+<div class="content">
+  <div class="panel" style="width:600px; margin:0 auto;">
+    <div class="head">Welcome</div>
+    <div class="inside textAlignCenter">
+      Select Retailer:<br><br>
+
+      <div style="width:300px; margin:0 auto;">
+          <%= select_tag 'id', options_for_select(Admin::Zone.all.collect{ |u| [u.name, u.id] }),prompt: 'Select a category',:class=>"selector" %>
+         <br>
+        <%= select_tag 'id', options_for_select(User.all(:conditions => ["role_id = 2"]).collect{ |u| [u.name, u.id] }),prompt: 'Select a Retailor',:class=>"selector" %>
+      </div>
+    </div>
+  </div>
+</div>
+

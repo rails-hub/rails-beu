@@ -1,0 +1,54 @@
+
+<%content_for :title, 'beam-e-up | Login'%>
+<%content_for :keywords, 'login' %>
+<%content_for :description, 'login to connect to beam-e-up' %>
+<script type="text/javascript">
+  $(document).ready(function(){
+  $("form select, input:checkbox, input:radio, input:file").uniform();
+  });
+
+</script>
+
+    <div style="text-align: center; margin-left:auto; margin-right: auto;">
+      <% flash[:notice]= notice %>
+      <% flash[:error]= alert %>
+    </div>
+   <div style="text-align: center; width: 100%; margin-left:auto; margin-right: auto;">  <br/><br/><br/>
+<img id="login-logo" src="/images/logo.png" width="116" height="67" alt="beam-e-up" align="middle" /><br /><br />
+  </div>
+    <div class="content textAlignCenter">
+      <div class="panel" style="width:450px; margin:0 auto;">
+        <div class="head">Login</div>
+        <div class="inside">
+          <%#= form_for(resource, :as => resource_name, :url => '/users/actions') do |f| %>
+          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+            <strong><%= f.label :login , 'Username:'%></strong><br />
+            <%= f.text_field :login , :class=>'e_field'%><br />
+
+            <strong><%= f.label :password ,'Password:'%></strong><br />
+            <%= f.password_field :password , :class=>'e_field'%><br />
+
+            <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+              <%= link_to "forgot password?", new_password_path(resource_name) %><br /><br />
+            <% end -%>
+            <%#*<a href="#">forgot password?</a><br /><br />%>
+            <%= f.submit "Login" , :class=>"edgyBlueButton b_text"%>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+
+
+  <%#*<footer id="footer">%>
+    <%#*<div class="content">%>
+      <%#*<div class="textAlignCenter">Beam-e-up. All rights Reserved &copy; 2012</div>%>
+    <%#*</div>%>
+  <%#*</footer><!-- #footer -->%>
+
+
+
+
+
+
+

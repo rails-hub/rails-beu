@@ -1,0 +1,29 @@
+<%= form_for([:api, :v1, @wallet]) do |f| %>
+  <% if @wallet.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@wallet.errors.count, "error") %> prohibited this wallet from being saved:</h2>
+
+      <ul>
+      <% @wallet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br />
+    <%= f.select :user_id, @user_ids.collect{|u| u.id } %>
+  </div>
+  <div class="field">
+    <%= f.label :deal_id %><br />
+    <%= f.select :deal_id, @deal_ids.collect{|d| d.id } %>
+  </div>
+  <div class="field">
+    <%= f.label :redempt %><br />
+    <%= f.check_box :redempt %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

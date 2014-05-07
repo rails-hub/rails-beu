@@ -1,0 +1,142 @@
+/* 
+    Document   : public
+    Created on : Sep 20, 2012, 1:05:33 PM
+    Author     : taimoor
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.b_text{
+    color: #666;
+/*    padding: 6px 9px 6px 9px;*/
+  padding: 7px 13px 7px 13px;
+}
+.b_text:hover{
+    color: white;
+}
+.e_field{
+    width:300px!important;
+}
+.links{
+    text-decoration: none;
+}
+#preview{
+    padding: 7px 12px 7px 12px;
+}
+
+.preview_div{
+    width: 283px;
+    height: 401px;
+}
+
+.hiden_div{
+    display:none;
+}
+.show_div{
+    display: block;
+}
+
+.acount_field{
+    width:120px!important;
+    margin-right:10px!important;
+}
+.acount_field1{
+    width:120px!important;
+}
+
+.acount_label{
+    font-weight: bold;
+}
+
+.link_button{
+    padding: 7px 12px;
+}
+
+table.subscription_table tr td{
+    padding: 0px;
+}
+
+#dynamic_p{
+/*    min-height: 169px;*/
+    min-height: 200px;
+}
+
+#inner_p{
+    padding-top: 10px;
+}
+span#text {
+    min-width: 128px;
+    height: 66px;
+    overflow: hidden;
+}
+
+form#deals_wizard input[type="text"]{
+    width: 100px;
+}
+form#deals_wizard h3{
+    display: inline;
+    color: #7D7D7D;
+    font-weight: bold;
+}
+
+div.show{
+   display:block;
+}
+
+div.hide{
+   display:none;
+}
+
+#img_container {
+    width: 150px;
+    height: 150px;
+    padding: 0.5em;
+/*    position:relative!important;*/
+/*    position:absolute;*/
+/*    top:2px!important;
+    left:8px!important;*/
+}
+/*#img_container h3 { text-align: center; margin: 0; }*/
+.ui-resizable-helper { border: 2px dotted #00F; }
+/*#dynamic_p {   border:2px solid #ccc;  }*/
+
+
+#credit_card_info_div{
+/*  position:fixed;*/
+/*  bottom:9px;*/
+  background-color: #e4ebf0;
+  border: solid 2px;
+  width: 494px;
+}
+form#credit_card_form .field input[type='text']{
+  width:185px;
+
+/*  margin-right:10px;*/
+
+}
+form#credit_card_form .field input{
+
+/*  margin: 0px 39px 0px 30px;*/
+/*  margin-right:10px;*/
+
+}
+form#credit_card_form .field label{
+  width: 148px;
+  float: left;
+  padding-left: 48px;
+  font-weight: bold;
+}
+
+
+form#credit_card_form{
+}
+

@@ -1,0 +1,50 @@
+<div class="contentHeader">
+  <div class="search"  style="visibility:hidden;">
+    <input type="text" placeholder="Type here to search..." style="width: 150px;"/>
+    <a class="searchBlueButton" href="#">Search</a>
+  </div>
+   <% activetab=0 %>
+  <% if (params[:controller]=="pages" && params[:action]=="0" ) %>
+      <% activetab=0 %>
+  <% elsif (params[:controller]=="deals" && params[:action]=="new" ) %>
+          <% activetab=1 %>
+  <% elsif (params[:controller]=="deals" && params[:action]=="index" ) %>
+      <% activetab=2 %>
+  <% elsif (params[:controller]=="users" && params[:action]=="show"  )  %>
+      <% activetab=3 %>
+  <% elsif (params[:controller]=="contactus" && params[:action]=="new" )  %>
+      <% activetab=4 %>
+  <% elsif (params[:controller]=="admin/zones" )  %>
+      <% activetab=5 %>
+  <% elsif (params[:controller]=="admin/classifieds" )  %>
+      <% activetab=6 %>
+  <% elsif (params[:controller]=="admin/questions"  )  %>
+      <% activetab=7 %>
+  <% elsif (params[:controller]=="contactus" && params[:action]=="new" )  %>
+      <% activetab=8 %>
+      <% elsif (params[:controller]=="admin/hotspots"  )  %>
+      <% activetab=9 %>
+  <% end %>
+  <div class="menu">
+    <ul>
+      <% if current_user.role_id==Role::ADMIN_USER_ID	  %>
+          <li class="<%= activetab==5? "selected": "" %>"><%= link_to 'Zones', admin_zones_url %></li>
+          <li class="<%= activetab==0 && !current_page?(admin_reports_path) ? "selected": "" %>"><%= link_to 'Retailers', users_url %></li>
+          <!--<li class="<%#= activetab==1? "selected": "" %>"><%#= link_to 'Develop a Campaign', new_deal_url %></li>
+          <li class="<%#= activetab==2? "selected": "" %>"><%#= link_to 'Manage Campaigns', deals_url %></li> -->
+          <li class="<%= activetab==6? "selected": "" %>"><%= link_to 'Classifieds', admin_classifieds_path %></li>
+          <li class="<%= "selected" if current_page?(admin_reports_path) %>"><%= link_to "Reports", admin_reports_path %></li>
+          <li class="<%= activetab==9? "selected": "" %>"><%= link_to 'Hotspots', admin_hotspots_path %></li>
+
+          <li class="<%= activetab==7? "selected": "" %>"><%= link_to 'Question of the Day', admin_questions_path %></li>
+      <% else %>
+          <li class="<%= activetab==1? "selected": "" %>"><%= link_to 'Develop a Campaign', new_deal_url %></li>
+          <li class="<%= activetab==2? "selected": "" %>"><%= link_to 'Manage Campaigns', deals_url %></li>
+          <li class="<%= activetab==3? "selected": "" %>"><%= link_to 'My Account', user_url(:id => current_user.id) %></li>
+          <li class="<%= activetab==4? "selected": "" %>"><%= link_to 'Contact', new_contactu_url %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+  

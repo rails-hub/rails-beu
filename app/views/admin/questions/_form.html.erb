@@ -1,0 +1,19 @@
+
+    <%= form_for(@admin_question) do |f| %>
+        <%= render 'partials/error_messages', :object => f.object %>
+        <div class="panel">
+          <div class="head"><h3>Question of the Day</h3></div>
+          <div class="inside">
+            <br>
+            <label for="question" class="static" style="vertical-align:top;">Question:</label><%= f.text_area :name,size: "60x5" %><br><br>
+            <label for="answer1" class="static">Answer 1:</label><%= f.text_field :ans1,:style=>"width:380px;" %><br><br>
+            <label for="answer2" class="static">Answer 2:</label><%= f.text_field :ans2,:style=>"width:380px;" %><br><br>
+            <label for="answer3" class="static">Answer 3:</label><%= f.text_field :ans3,:style=>"width:380px;" %><br><br>
+            <label for="answer4" class="static">Answer 4:</label><%= f.text_field :ans4,:style=>"width:380px;" %><br><br>
+            <label for="answer5" class="static">Answer 5:</label><%= f.text_field :ans5,:style=>"width:380px;" %><br><br>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <%= f.submit 'Submit', :class => "edgyBlueButton nomargin floatRight" %>
+        <div class="clear"></div>
+    <% end %>

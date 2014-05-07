@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @user_store.user_id %>
+</p>
+
+<p>
+  <b>Store:</b>
+  <%= @user_store.store_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_user_store_path(@user_store) %> |
+<%= link_to 'Back', api_v1_user_stores_path %>

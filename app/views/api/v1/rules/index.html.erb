@@ -1,0 +1,31 @@
+<h1>Listing rules</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>All age</th>
+    <th>Age from</th>
+    <th>Age to</th>
+    <th>Gender</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @rules.each do |rule| %>
+  <tr>
+    <td><%= rule.name %></td>
+    <td><%= rule.all_age %></td>
+    <td><%= rule.age_from %></td>
+    <td><%= rule.age_to %></td>
+    <td><%= rule.gender %></td>
+    <td><%= link_to 'Show', api_v1_rule_path(rule) %></td>
+    <td><%= link_to 'Edit', edit_api_v1_rule_path(rule) %></td>
+    <td><%= link_to 'Destroy', api_v1_rule_path(rule), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Rule', new_api_v1_rule_path %>

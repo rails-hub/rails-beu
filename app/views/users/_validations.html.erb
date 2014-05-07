@@ -1,0 +1,157 @@
+<script type="text/javascript">
+
+
+    /* <![CDATA[ */
+    /*
+
+    jQuery(function(){
+        jQuery("#user_business_name").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "*business name is required"
+        });
+        jQuery("#user_username").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "*administrator is required"
+        });
+        jQuery("#user_email").validate({
+            expression: "if (VAL.match(/^[^\\W][a-zA-Z0-9\\_\\-\\.]+([a-zA-Z0-9\\_\\-\\.]+)*\\@[a-zA-Z0-9_]+(\\.[a-zA-Z0-9_]+)*\\.[a-zA-Z]{2,4}$/)) return true; else return false;",
+            message: "*email is invalid"
+        });
+        jQuery("#user_mobile").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "*phone is required"
+        });
+        jQuery("#plans").validate({
+            expression: "if (isChecked(SelfID)) return true; else return false;",
+            message: "Please select a subscription plan"
+        });
+
+        jQuery("#servicegroup").validate({
+            expression: "if (isChecked(SelfID)) return true; else return false;",
+            message: "Please select a service type"
+        });
+
+        jQuery("#payment_name").validate({
+            expression: "if( (jQuery('#payment_name').val().length<=0) && jQuery('#payment_agreetopay').attr('checked'))  return false; else  return true; ",
+            message: "*Name is required"
+        });
+        jQuery("#payment_cardNumber").validate({
+            expression: "if( (jQuery('#payment_cardNumber').val().length<=0) && jQuery('#payment_agreetopay').attr('checked') && VAL.match(/^[0-9]*$/) )  return false; else  return true; ",
+            message: "*Card Number is required"
+        });
+
+
+        jQuery("#payment_expireDate").validate({
+            expression: "if ((jQuery('#payment_expireDate').val().length<=0) && jQuery('#payment_agreetopay').attr('checked') && !isValidDate(parseInt(VAL.split('-')[2]), parseInt(VAL.split('-')[0]), parseInt(VAL.split('-')[1]))) return false; else return true;",
+            message: "*Please enter a valid Expire Date"
+        });
+
+        */
+
+         /*
+        jQuery("#ValidInteger").validate({
+            expression: "if (VAL.match(/^[0-9]*$/) && VAL) return true; else return false;",
+            message: "Please enter a valid integer"
+        });
+        jQuery("#ValidDate").validate({
+            expression: "if (!isValidDate(parseInt(VAL.split('-')[2]), parseInt(VAL.split('-')[0]), parseInt(VAL.split('-')[1]))) return false; else return true;",
+            message: "Please enter a valid Date"
+        });
+
+
+        jQuery("#ValidPassword").validate({
+            expression: "if (VAL.length > 5 && VAL) return true; else return false;",
+            message: "Please enter a valid Password"
+        });
+        jQuery("#ValidConfirmPassword").validate({
+            expression: "if ((VAL == jQuery('#ValidPassword').val()) && VAL) return true; else return false;",
+            message: "Confirm password field doesn't match the password field"
+        });
+        jQuery("#ValidSelection").validate({
+            expression: "if (VAL != '0') return true; else return false;",
+            message: "Please make a selection"
+        });
+        jQuery("#ValidMultiSelection").validate({
+            expression: "if (VAL) return true; else return false;",
+            message: "Please make a selection"
+        });
+        jQuery("#ValidRadio").validate({
+            expression: "if (isChecked(SelfID)) return true; else return false;",
+            message: "Please select a radio button"
+        });
+        jQuery("#ValidCheckbox").validate({
+            expression: "if (isChecked(SelfID)) return true; else return false;",
+            message: "Please check atleast one checkbox"
+        });
+        jQuery('.AdvancedForm').validated(function(){
+            alert("Use this call to make AJAX submissions.");
+        });
+        */
+
+    /* ]]> */
+
+    $(function(){
+        // binds form submission and fields to the validation engine
+        jQuery("#new_user").validationEngine();
+    });
+</script>
+<script type="text/javascript">
+	$(function() {
+        amount();//on load call
+        function amount()
+        {
+           var price=0;
+           var period=$("#term").val();
+
+           var selected = $("input[type='radio']:checked");
+            if (selected.length > 0)
+                price = selected.attr("data");
+
+            $("#dueamount").html(Math.round(price*period));
+            $("#payment_amount").val(Math.round(price*period));
+            $("#payment_amount").hide();
+        }
+        $("#term").click(function(){
+            amount();
+            var today=  moment().format('DD-MM-YYYY') ;
+            $("#fromdate").text(today).css({'font-weight':'bold'});
+            $("#todate").text(moment().add('days',$(this).val()*30).format('DD-MM-YYYY')).css({'font-weight':'bold'});
+        });
+         <%#=
+		$("input:radio").click(function(){
+            //Make Due Amount
+            amount();
+            //[name='user[subscription_details_attributes][0][plan_id]']
+			//alert($(this).attr("name"));
+			//alert($(this).attr('id'));
+			if ($(this).attr("name")=='user[subscription_details_attributes][0][plan_id]'){
+
+                         var attr_id = $(this).attr("id").split('@')
+			$('#subPlan').text(attr_id[0]).css({'font-weight':'bold'});
+			$('#campPerMonth').text(attr_id[1]).css({'font-weight':'bold'});
+			$('#plan_id').val(attr_id[2]);
+			}
+			else
+			{
+			$('#subLevel').text($(this).attr("id")).css({'font-weight':'bold'});
+
+			if($(this).attr("id")=='rdoselfservice'){
+				$("div#full").hide();
+				$("div#self").show();
+                              
+			}
+			else
+			{
+				$("div#full").show();
+				$("div#self").hide();
+                           
+			}
+			}
+		});
+%>
+        $("#payment_expireDate").datepicker({
+            dateFormat: "dd.mm.yy"
+        });
+	});
+
+</script>

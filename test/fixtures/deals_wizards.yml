@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  fixed_offer: false
+  buy_units: 1
+  buy_offer: 1.5
+  spend_amount: 1
+  spend_offer: 1.5
+
+two:
+  fixed_offer: false
+  buy_units: 1
+  buy_offer: 1.5
+  spend_amount: 1
+  spend_offer: 1.5

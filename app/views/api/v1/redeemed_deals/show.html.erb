@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>User:</b>
+  <%= @redeemed_deal.user_id %>
+</p>
+
+<p>
+  <b>Deal:</b>
+  <%= @redeemed_deal.deal_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_redeemed_deal_path(@redeemed_deal) %> |
+<%= link_to 'Back', redeemed_deals_path %>

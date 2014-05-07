@@ -1,0 +1,53 @@
+
+<% content_for :title, 'beam-e-up | Edit My Account Details' %>
+<% content_for :keywords, '' %>
+<% content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial => 'partials/main_menu' %>
+  <%= render 'upload_pic' %>
+  
+  <%= form_for(@user) do |f| %>
+      <%= render :partial => 'validations' %>
+      <div class="contentInside">
+        <!-- Content goes here-->
+        <div class="panel">
+          <div class="head"><h3>Enter Account Details</h3></div>
+          <div class="inside">
+            <label for="businessName" class="static"><strong>Business Name</strong>:</label>
+            <%= f.text_field :business_name, :class => 'acount_field validate[required] text-input', style: "width:120px; margin-right:10px;"%>
+            <label for="administrator" class="static"><strong>Administrator</strong>:</label>
+            <%= f.text_field :username, :class => 'acount_field validate[required] text-input', style: "width:120px; margin-right:10px;" %>
+            <label for="phone" class="static"><strong>Phone</strong>:</label>
+            <%= f.text_field :mobile, :class => 'acount_field validate[required,custom[integer]].text-input', style: "width:120px;" %>
+            
+            <br/><br/>
+            <label for="address" class="static"><strong>Address</strong>:</label>
+            <%= f.text_field :address, :class => 'acount_field validate[required] text-input', style: "width:120px; margin-right:10px;" %>
+            <label for="email" class="static"><strong>Email</strong>:</label>
+            <%= f.text_field :email, :class => 'acount_field validate[groupRequired[payments],custom[email]] text-input', style: "width:120px; margin-right:10px;" %>
+            
+            <br/><br/> <%= image_tag get_reatailer_pic(@user, @tmp_user)  %><br/>
+            <div>
+              <%= f.label :retailer_img_url, 'Retailer Logo' %>
+              <input type="button" id="upload_retailer" name="upload_retailer" value="Retailer Logo" class='edgyBlueButton cookie_setter' onclick="upload_img($(this));"/>
+              
+
+            </div>
+            <br/><br/>
+          </div>
+        </div>
+
+        <a class="edgyBlueButton nomargin" onClick="window.history.go(-1)">Back</a>
+
+        <div class="floatRight"><%= f.submit 'Save', :class => "edgyBlueButton nomargin link_button" %>
+
+          <div class="clear"></div>
+          <div class="clear"></div>
+          <!-- Content ends here-->
+        </div>
+
+  <% end %>
+
+  </div>
+</div>

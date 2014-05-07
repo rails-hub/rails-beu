@@ -1,0 +1,31 @@
+
+<%= radio_button_tag '1[0]','1', true,:class => "data_restrict" %><h3> Buy One, Get One (BOGO) </h3><br /><br />
+
+    <div id="d_1_0_1" class="show toggle_d">
+      <%= radio_button_tag '1[1]','1' %><%= label_tag '1[1_1][1]', 'Buy one, get one free' %><br /><br/>
+      <%= radio_button_tag '1[1]','2' %> Buy  &nbsp;<%= text_field_tag '1[1_2][1]' %> and get &nbsp;<%= text_field_tag '1[1_2][2]' %>  free!<br /><br/>
+      <%= radio_button_tag '1[1]','3' %> Buy  &nbsp;<%= text_field_tag '1[1_3][1]' %> and get $ &nbsp;<%= text_field_tag '1[1_3][2]' %>  off your purchase!<br /><br/>
+      <%= radio_button_tag '1[1]','4' %> Buy  &nbsp;<%= text_field_tag '1[1_4][1]' %> and get % &nbsp;<%= text_field_tag '1[1_4][2]' %>  off!<br /><br/>
+      <%= radio_button_tag '1[1]','5' %> Buy  &nbsp;<%= text_field_tag '1[1_5][1]' %> and get % &nbsp;<%= text_field_tag '1[1_5][2]' %>  off the next unit!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '1[0]','2', false, :class => "data_restrict" %><h3> Increase Transaction Size - Storewide  </h3><br /><br />
+
+    <div id="d_1_0_2" class="hide toggle_d">
+      <%= radio_button_tag '1[2]','1' %> Spend $ &nbsp;<%= text_field_tag '1[2_1][1]'%> or more in store and receive $ &nbsp;<%= text_field_tag '1[2_1][2]'%>off your purchase!<br /><br/>
+      <%= radio_button_tag '1[2]','2' %> Spend $ &nbsp;<%= text_field_tag '1[2_2][1]'%> or more in store and receive &nbsp;<%= text_field_tag '1[2_2][2]'%> % off your purchase!<br /><br/>
+      <%= radio_button_tag '1[2]','3' %> Spend $ &nbsp;<%= text_field_tag '1[2_3][1]'%> or more in store and receive a &nbsp;<%= text_field_tag '1[2_3][2]'%>with your purchase!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '1[0]','3', false, :class => "data_restrict" %><h3>Group Shopper Coupon </h3><br /><br />
+
+    <div id="d_1_0_3" class="hide toggle_d">
+      <%= radio_button_tag '1[3]','1' %> Come in with &nbsp;<%= text_field_tag '1[3_1][1]'%> or more friends, spend $ &nbsp;<%= text_field_tag '1[3_1][2]'%>or more in store as a group and receive $ &nbsp;<%= text_field_tag '1[3_1][3]'%>off your total group purchase!<br /><br/>
+      <%= radio_button_tag '1[3]','2' %> Come in with &nbsp;<%= text_field_tag '1[3_2][1]'%> or more friends, spend $ &nbsp;<%= text_field_tag '1[3_2][2]'%>or more in store as a group and receive &nbsp;<%= text_field_tag '1[3_2][3]'%> % off your total group purchase!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '1[0]','4', false, :class => "data_restrict" %><h3>Upsize</h3><br /><br />
+
+    <div id="d_1_0_4" class="hide toggle_d">
+      <%= radio_button_tag '1[4]','1' %> Order a &nbsp;<%= text_field_tag '1[4_1][1]'%> and receive &nbsp;<%= text_field_tag '1[4_1][2]'%>for $ &nbsp;<%= text_field_tag '1[4_1][3]'%> more!<br /><br/>
+    </div>

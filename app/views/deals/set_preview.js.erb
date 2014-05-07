@@ -1,0 +1,14 @@
+$("#dynamic_p").replaceWith("<%= escape_javascript render :partial => 'preview', :locals => {:deal => @deal, :tmp_img => @tmp_img, :deal_wizard => @deal_wizard, :js=>true} %>");
+$( "#img_container, #item_img_container, #text" ).resizable({ghost: true,
+    maxHeight: 200,
+    maxWidth: 240,
+    <%#*containment: "#dynamic_p",%>
+    stop: function(){
+        save_style_data($(this));
+    }
+});
+
+$( "#img_container, #item_img_container, #text" ).draggable({ containment: "#dynamic_p", stop: function(){
+    save_style_data($(this));
+}
+});

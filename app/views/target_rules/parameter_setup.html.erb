@@ -1,0 +1,123 @@
+<%content_for :title, 'beam-e-up | Parameter Setup'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="steps">
+      <div class="step past one">
+        <div class="number">1</div><br /><br />Coupon Creation <img src="/images/checked.png" width="11" height="8" alt="Done"/>
+      </div>
+      <div class="step current two">
+        <div class="number">2</div><br /><br />Campaign Parameters Setup
+      </div>
+      <div class="step three">
+        <div class="number">3</div><br /><br />Review &amp; Submit
+      </div>
+    </div>
+    <%= form_for(@target_rule, :url=> show_params_target_rules_path, :method=> :post, :html=>{:onsubmit=>'check_format()'}) do |f| %>
+      <% if @target_rule.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@target_rule.errors.count, "error") %> prohibited this target_rule from being saved:</h2>
+
+          <ul>
+            <% @target_rule.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+      
+      <%= hidden_field_tag :deal_id, params[:deal_id] %>
+      <label class="static" ><strong>Campaign Name:</strong></label> <%= f.text_field :name, :style=>"width:250px;" ,:placholder=>'New Campaign'%><br /><br />
+      <div class="panel">
+        <div class="head"><h3>Select the Target Audience</h3></div>
+        <div class="inside">
+          <div class="q" style="width:670px;">
+            Please choose all targeting parameters that apply to your campaign:<br />
+            <table>
+              
+
+              <tr>
+                <th><%= f.label :all , 'All:'%></th>
+                <td><%= f.check_box :all %></td>
+              </tr>
+              <tr class="under_all">
+                <th>Age Category:</th>
+              
+                <td><%= f.check_box :age_12_17 %><%= f.label :age_12_17 , '12-17'%></td>
+                <td><%= f.check_box :age_18_35 %><%= f.label :age_18_35 , '18-35' %></td>
+                <td><%= f.check_box :age_36_44 %><%= f.label :age_36_44 , '36-44' %></td>
+                <td><%= f.check_box :age_45_and_older %><%= f.label :age_45_and_older , '45 and older'%></td>
+
+              </tr>
+              <tr class="under_all">
+                <th>Gender:</th>
+                <td>
+                  <%= f.check_box :male %><%= f.label :male , 'Male'%>
+                </td>
+                <td>
+                  <%= f.check_box :female %><%= f.label :female , 'Female'%>
+                </td>
+              </tr>
+              <tr >
+                <th>Birthday:</th>
+                <td><%= f.check_box :today %><%= f.label :today , 'Today'%></td>
+                <td><%= f.check_box :this_week %><%= f.label :this_week , 'This Week'%></td>
+                <td><%= f.check_box :within_30_days %><%= f.label :within_30_days , 'Within 30 Days'%></td>
+              </tr>
+              <tr>
+                <th>Past Customer:</th>
+                <td><%= f.check_box :is_pastcustomer %><%= f.label :is_pastcustomer, 'Yes' %></td>
+                <td><%= f.check_box :not_pastcustomer %><%= f.label :not_pastcustomer, 'No' %></td>
+              </tr>
+              <tr>
+                <th>Is this a Gift or Specialty/Seasonal Item?</th>
+                <td><%= f.radio_button :gift_or_seasonal_item, true %><%= f.label :gift_or_seasonal_item , 'Yes'%></td>
+                <td><%= f.radio_button :gift_or_seasonal_item, false %><%= f.label :gift_or_seasonal_item , 'No'%></td>
+              </tr>
+            </table>
+          </div>
+
+          <div class="clear"></div><br />
+          <div class="divider"></div><br />
+
+          <label class="static"><strong>Campaign Start Date:</strong></label>
+
+          <%#= f.check_box :stoday, :onclick=>"set_date($(this))" %>
+          <%#= f.label :stoday, 'Today' %>
+          <%#*<span style="margin-right:18px;"></span>%>
+          <span style="margin-right:78px;"></span>
+          <div id="s_div" style="display:inline;">
+            <%= f.datetime_select :start_date ,{} ,{} %>
+          </div>
+            
+            <br /><br />
+       
+
+          <label class="static"><strong>Campaign End Date:</strong></label><span style="width:78px; display:inline-block;"></span>
+          
+            <%= f.datetime_select :end_date ,{}, {:style=>"float:left;"} %>
+          
+        </div>
+      </div>
+
+      <a class="edgyBlueButton nomargin" onClick="window.history.go(-1)">Previous</a>
+
+      <div class="floatRight">
+        <%= f.submit 'Next', :class=>"nextbutton nomargin"%>
+      </div>
+    <%end%>
+    <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+
+
+
+
+
+
+

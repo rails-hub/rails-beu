@@ -1,0 +1,15 @@
+<a class="edgyBlueButton" href="#" style="width:300px;">Take a Tour?</a><br /><br />
+<%= link_to 'Create New Coupon or Deal Campaign?', new_deal_path , :style=>"width:300px;" , :class=>"edgyBlueButton" %>
+<br /><br />
+<%if current_user.sign_in_count>1%>
+    <%= link_to 'Track, Edit or Delete an Existing Campaign?', deals_path , :style=>"width:300px;" , :class=>"edgyBlueButton" %>
+    <br /><br />
+<%end%>
+<%= link_to 'View or Edit your Account/Subscription Information?', user_url(:id => current_user.id) , :style=>"width:300px;" , :class=>"edgyBlueButton" %>
+<br /><br />
+<%= link_to 'Contact Us?', new_contactu_path , :style=>"width:300px;" , :class=>"edgyBlueButton" %>
+<br /><br />
+<%unless cookies[:remember_admin_id].nil? %>
+    <%= link_to 'Back to Admin', switchbacktoadmin_path , :style=>"width:300px;" , :class=>"edgyBlueButton" %>
+<% end %>
+<br /><br />

@@ -1,0 +1,7 @@
+$("#cboxClose").click();
+path = "", pathname = window.location.pathname;
+if(pathname.split("/")[1] == "deals"){
+    path = "/deals/set_preview/?normal_js=true"
+    if (pathname.split("/")[2] != "new") path += "&deal_id="+pathname.split("/")[2]
+    $.getScript(path);
+}

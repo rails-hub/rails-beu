@@ -1,0 +1,72 @@
+<!--  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+<script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script> -->
+ <script>
+     
+ $(function() {
+
+   $("#dialog").dialog({
+       resizable: false,
+       height:180,
+       closeOnEscape: false,
+       title:"Confirmation",
+       modal: true,
+       autoOpen: false
+   });
+    $(".edgyBlueButton.showdialog").click(function() {
+    $("#dialog").find("a").remove();
+    $("#dialog").append("<a  id='btnshow' data-method='delete' class='edgyBlueButton' style='margin-left:0px' href='/admin/zones/"+$(this).attr("id")+"'>Delete</a>");
+    $("#dialog").dialog("open");
+     
+     $('#btnshow').bind('click', function() {
+
+     if($('input#txtpwd').val()=='' || $('input#txtuser').val()==''){
+     alert('Enter username and password.');
+      return false;
+      }
+      else {
+      //alert($('input#txtpwd').val());
+        //$.removeCookie('userpass');
+        //$.cookie('userpass', $('input#txtpwd').val());
+         eraseCookie('userpass');
+         eraseCookie('username');
+         createCookie('userpass', $('input#txtpwd').val(),1);
+         createCookie('username', $('input#txtuser').val(),1);
+      }
+    });
+      
+    });
+   
+  
+    });
+   </script>
+
+<div class="panel">
+  <div class="head"><h3>Manage Zones</h3></div>
+
+  <div class="inside nopadding">
+    <table class="data">
+      <tbody>
+      <% if @admin_zones.length>0 %>
+      <% @admin_zones.each do |admin_zone| %>
+          <tr>
+            <td style='margin-left: 25px;'><%= admin_zone.name %></td>
+            <td class="textAlignRight">
+            	<%= link_to 'Edit', edit_admin_zone_path(admin_zone) ,class: "edgyBlueButton" %>
+            	<%#= link_to 'Delete', admin_zone, method: :delete ,class: "edgyBlueButton", data: { confirm: 'Are you sure?' } %>
+            	<!-- <input value="Delete" type="button" class="edgyBlueButton" id=<%#= admin_zone.id %>> </input> -->
+            	<%= link_to 'Delete', '#',class: "edgyBlueButton showdialog" ,:id => admin_zone.id %>
+            	</td>
+          </tr>
+      <% end %>
+          <% else %>
+          &nbsp;&nbsp;&nbsp;&nbsp; <%= " There is no zone setup in the system. Please add one to get started." %>
+      <% end %>
+       <div id="dialog" title="Delete confirmation">
+          Admin Username:<br /> <input  type="text" id="txtuser"></input>
+          Password: <br />  <input  type="password" id="txtpwd"></input>
+      </div>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,231 @@
+<% content_for :title, 'beam-e-up | Home' %>
+<% content_for :keywords, '' %>
+<% content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial => 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <h2>Manage Campaigns</h2>
+
+    <div class="panel">
+      <div class="head"><h3><%= params[:archive] ? "Disabled" : "Active" %> Campaigns</h3>
+
+        <div class="q1 floatRight nomargin" style="width:160px; padding-right:0px; margin-top: -23px !important; margin-right: -40px !important;">
+
+          <div class="selector" id="filter-deals"><span><%= params[:archive] ? "View Disabled Campaigns" : "View Active Campaigns" %></span>
+            <select onChange="reload_page(this.value)" id="filter-deals-selct" name="filter-deals-selct" style="opacity: 0;">
+              <option value="">Filter Campaigns</option>
+              <option value="archive=true" <%= params[:archive] ? "selected" : "" %>>View Disabled Campaigns</option>
+              <option value="">View Active Campaigns</option></select>
+          </div>
+
+        </div>
+
+      </div>
+
+
+
+      <div class="inside nopadding">
+        <table class="data">
+          <% count=1 %>
+          <% @deals.each do |deal| %>
+            <tr>
+              <td><strong> <%= count %>: </strong> <%= link_to campaign_title(deal), deal_path(deal) %></td>
+              <% count = count+1 %>
+              <td class="textAlignRight">
+                <%= link_to 'Edit', edit_deal_path(deal), :class => "edgyBlueButton" %>
+                <%= link_to 'Delete', deal, :method => :delete, :data => {:confirm => 'Are you sure?'}, :class => "edgyBlueButton" %>
+                <%= link_to deal.is_inactive? ? "Make Active" : "Disable", deal_path(deal, :deal => {:is_inactive => !deal.is_inactive}, :commit => "status_update"), :method => :put, :class => "edgyBlueButton" %>
+  <%#*<a class="edgyBlueButton" href="#">Edit</a>%>
+  <%#*<a class="edgyBlueButton" href="#">Delete</a>%>
+              </td>
+            </tr>
+          <% end %>
+          <% if @deals.count==0 %>
+            <tr>
+              <td><strong>No Campaigns exist.</strong></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <%= search_form_for @q do |f| %>
+      <div class="panel">
+        <div class="head"><h3>Statistics</h3></div>
+        <div class="inside">
+
+          <div class="q3">
+            <div class="q1 floatRight nomargin" style="width:160px; padding-right:7px;">
+              <%= f.select :id_eq, @deals.collect { |target| [target.title, target.id] } ,:include_blank => "Please select a campaign"%>
+            </div>
+
+            <a class="tabBlueButton" href="">Data Frequency
+              <!-- <img src="images/icons/arrowDown.png" width="12" height="11" alt="Choose Your Statistics"/> --></a><br/>
+
+            <div class="dataSection" style="height: 400px;">
+              <div class="graph">
+                <div class="graphContent" style="width: 700px; float: left;">
+                  <div class="graphTitle">
+                    <!-- <h3>Graph Title</h3> -->
+                    Results for <%= @current_date_label %>
+                  </div>
+                  <br/>
+
+                  <div id="graph-container" style="width: 650px; height: 300px;"></div>
+                </div>
+
+                <div class="graphStats" style="width: 170px; float: left;">
+                  <h3><%= count_arr_for @deals_view_users %></h3>
+                  Coupons Generated<br/><br/>
+
+                  <h3><%= count_arr_for @redeemed_deals %></h3>
+                  Coupons Redeemed<br/><br/>
+
+                </div>
+
+                <div class="clear"></div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <br/>
+
+            <div class="q1" style="width:270px;">
+              <%= radio_button_tag :selected_date_filter_type, "current", params[:selected_date_filter_type] == "current"  %><label for="selected">Selected:</label><br/>
+              <select>
+                <option>This Month</option>
+              </select><br/>
+            </div>
+            <div class="q1" style="width:270px;">
+              <%= radio_button_tag :selected_date_filter_type, "selected_day", params[:selected_date_filter_type]  == "selected_day" %><label for="selectedDay">Selected
+                Day:</label><br/>
+              <%= text_field_tag :current_date, (params[:current_date] if params[:selected_date_filter_type] == "selected_day"), :class=>"datepicker" %><br/>
+            </div>
+            <div class="q1 nomargin" style="width:293px; margin-top: -19px !important;">
+              <br/>
+              <br/>
+              <!-- <%#= link_to deals_path(params.merge!({:format=>"pdf"})),  :class=>"iconBlueButton" do %>
+  <%#*<img src="images/icons/pdf.png" width="18" height="19" alt="PDF"/>PDF%>
+  <%#*Report<% end %>%>
+  <%#*<a class="iconBlueButton nomargin" href="#"><img src="images/icons/xls.png" width="18" height="19" alt="PDF"/>XLS%>
+  <%#*Report</a><br/><br/>%> -->
+              <%= link_to image_tag("/images/icons/pdf.png")+ "PDF Report", deals_path(params.merge!({:format=>"pdf"})),  :class=>"iconBlueButton" %>
+              <%= link_to image_tag("/images/icons/xls.png")+ "XLS Report", deals_path(params.merge!({:format=>"xls"})),  :class=>"iconBlueButton" %>
+              <br/>
+              <br/>
+            </div>
+            <div class="clear"></div>
+
+            <div class="q1" style="width:270px;">
+              <%= radio_button_tag :selected_date_filter_type, "selected_month", params[:selected_date_filter_type] == "selected_month" %><label for="selectedMonth">Selected
+                Month:</label><br/>
+
+              <div class="q" style="width:120px;">
+                <%= select_tag :filter_month, options_for_select(Date::MONTHNAMES.each_with_index.collect { |m, i| [m, i] }, ( params[:filter_month] if params[:selected_date_filter_type] == "selected_month")) %>
+              </div>
+              <div class="q nomargin" style="width:120px;">
+                <%= select_tag :filter_year, options_for_select(DateTime.now.year.downto(2010).collect { |d| [d, d] }, ( params[:filter_year] if params[:selected_date_filter_type] == "selected_month")) %>
+              </div>
+            </div>
+            <div class="q1" style="width:280px;">
+              <%= radio_button_tag :selected_date_filter_type, "range_selection", params[:selected_date_filter_type] == "range_selection" %>Date
+              Range:</label><br/>
+              <div class="q" style="width:130px;">
+                <%= text_field_tag :start_date, (params[:start_date] if params[:selected_date_filter_type] == "range_selection"), :class=>"datepicker" %>
+              </div>
+              <div class="q nomargin" style="width:130px;">
+                <%= text_field_tag :stop_date, (params[:stop_date] if params[:selected_date_filter_type] == "range_selection"), :class=>"datepicker" %>
+              </div>
+            </div>
+            <div class="q1 nomargin" style="width:280px;">
+              <br/>
+              <a href="#">Download the latest Report</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <%= f.submit "Search", :class => "edgyBlueButton", :style => "margin-left: 3px; margin-top: 0px; " %>
+              <br/>
+            </div>
+
+            <br/>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+      </div>
+      
+
+      <!-- <div class="divider"></div>
+      <br/>
+      <a class="tabBlueButton" href="#">Detailed Log</a>
+      <a class="tabBlueButton" href="#">Chart Data</a>
+
+      <div class="panel noheading">
+        No Data Available
+      </div> -->
+
+      <div class="clear"></div>
+      <!-- Content ends here-->
+    </div>
+
+  <% end %>
+</div> <!-- content class div end -->
+
+<script type="text/javascript">
+
+  function reload_page(id){
+    location.href="deals?"+ id
+  }
+
+  $(function () {
+    var chart;
+    $(document).ready(function () {
+      $(".datepicker").datepicker({dateFormat: "yy-mm-dd"});
+      chart = new Highcharts.Chart({
+        chart:{
+          renderTo:'graph-container',
+          type:'line',
+        },
+        title:{
+          text:'Coupons Statistics',
+          x:-20 //center
+        },
+        xAxis:{
+          categories:<%= @graph_x.html_safe %>
+        },
+        yAxis:{
+          title:{
+            text:'Total'
+          },
+          plotLines:[
+            {
+              value:-5,
+              width:1,
+              color:'#808080'
+            }
+          ]
+        },
+        legend:{
+          layout:'vertical',
+          align:'right',
+          verticalAlign:'top',
+          x:-10,
+          y:100,
+          borderWidth:0
+        },
+        series:[
+          {
+            name:'Generated',
+            data: <%= @deals_view_users.to_json %>
+          },
+          {
+            name:'Redeemed',
+            data: <%= @redeemed_deals.to_json %>
+
+          }
+        ]
+      });
+    });
+
+  });
+</script>

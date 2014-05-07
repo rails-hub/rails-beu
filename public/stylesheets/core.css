@@ -1,0 +1,71 @@
+/* 
+    Document   : core
+    Created on : Oct 20, 2012, 12:11:19 AM
+    Author     : taimoor
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+/* 
+   TODO customize this sample style
+   Syntax recommendation http://www.w3.org/TR/REC-CSS2/
+*/
+
+root { 
+    display: block;
+}
+
+.error {
+background-color: #9C3;
+/*background-image: url(/images/admin/icon_ok.png);*/
+font-weight: bold;
+}
+.notice {
+background-color: #9C3;
+/*background-image: url(/images/admin/icon_ok.png);*/
+font-weight: bold;
+}
+
+.flash {
+padding: 9px 15px 9px 30px;
+background: no-repeat 10px 10px;
+margin-bottom: 30px;
+color: white;
+}
+.notification
+{
+	margin: auto;
+	width: 400px;
+	text-align: center;
+	padding: 8px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+.notification p {
+	color: #333;
+	font-family: Verdana, Geneva, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	padding: 0px;
+	margin: 0px;
+}
+
+
+.success {
+	background-image: url(../images/accept.png);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 2px solid #99C600;
+	background-color: #ECFFAA;
+}
+
+.failure {
+	background-image: url(/images/no.png);
+	background-position: 15px center;
+	background-repeat: no-repeat;
+	border: 2px solid #EB5339;
+	background-color: #F8CBC2;
+	text-align: center;
+}

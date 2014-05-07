@@ -1,0 +1,31 @@
+<h1>Listing credit_card_informations</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Card number</th>
+    <th>Expiry date</th>
+    <th>User</th>
+    <th>Response</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @credit_card_informations.each do |credit_card_information| %>
+  <tr>
+    <td><%= credit_card_information.name %></td>
+    <td><%= credit_card_information.card_number %></td>
+    <td><%= credit_card_information.expiry_date %></td>
+    <td><%= credit_card_information.user %></td>
+    <td><%= credit_card_information.response %></td>
+    <td><%= link_to 'Show', credit_card_information %></td>
+    <td><%= link_to 'Edit', edit_credit_card_information_path(credit_card_information) %></td>
+    <td><%= link_to 'Destroy', credit_card_information, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Credit card information', new_credit_card_information_path %>

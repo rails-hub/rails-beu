@@ -1,0 +1,14 @@
+
+    <%= form_for(@admin_zone) do |f| %>
+        <%= render 'partials/error_messages', :object => f.object %>
+         <div class="panel">
+          <div class="head"><h3>Add a Zone</h3></div>
+          <div class="inside">
+            <br/>
+            <label for="zone" style="margin-right:20px;">Zone Name:</label><%= f.text_field :name,style: "width:250px;" %><br/><br/>
+          </div>
+          <div class="clear"></div>
+        </div>
+        <%= f.submit 'Submit', :class => "edgyBlueButton nomargin floatRight" %>
+        <div class="clear"></div>
+    <% end %>

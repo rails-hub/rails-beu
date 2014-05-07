@@ -1,0 +1,8 @@
+== Setup.
+
+1) Must have Postgre
+2) Install rmagic
+3) Bundle install
+4) rake db:create
+5) rake db:migrate
+6) rake db:seed

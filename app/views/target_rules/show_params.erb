@@ -1,0 +1,58 @@
+<%content_for :title, 'beam-e-up | Review Campaign &amp; Submit'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="steps">
+      <div class="step past one">
+        <div class="number">1</div><br /><br />Coupon Creation <img src="/images/checked.png" width="11" height="8" alt="Done"/>
+      </div>
+      <div class="step past two">
+        <div class="number">2</div><br /><br />Campaign Parameters Setup <img src="/images/checked.png" width="11" height="8" alt="Done"/>
+      </div>
+      <div class="step current three">
+        <div class="number">3</div><br /><br />Review &amp; Submit
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="head"><h3>Review Campaign &amp; Submit</h3></div>
+      <div class="inside">
+        <div class="q" style="width: 586px;"><br />
+          <label class="static">Campaign Name: </label><strong><%= campaign_name(@target_rule.name) %></strong><br /><br />
+          <label class="static">Age Category: </label><strong><%=  get_age_categories(@target_rule) %></strong><br /><br />
+          <label class="static">Gender: </label><strong><%= get_genders(@target_rule)%></strong><br /><br />
+          <label class="static">Past Customer: </label><strong><%= allowed_customer(@target_rule)%></strong><br /><br />
+          <label class="static">Gift or Seasonal Item: </label><strong><%=gift_or_seasonal_item(@target_rule.gift_or_seasonal_item) %></strong><br /><br/>
+          <label class="static">Campaign Start Date: </label><strong><%= get_start_date(@target_rule.start_date,@target_rule.stoday) %></strong><br /><br />
+          <label class="static">Campaign End Date: </label><strong><%= @target_rule.end_date.present? ? @target_rule.end_date.strftime('%B %d, %Y') : 'N/A' %></strong><br />
+          
+        </div>
+
+        <div class="q nomargin" style="width:242px; text-align:center;">
+          <br />
+            <div class="preview" style="background-color:rgb(245, 245, 245)" >
+              <%= render :partial => 'deals/preview', :locals=>{:deal => @deal, :tmp_img => @tmp_img, :deal_wizard => @deal_wizard} %>
+              <input type="hidden" id="new_deal" name="new_deal" value="true"/>
+            </div>
+        </div>
+
+        <div class="clear"></div><br />
+      </div>
+    </div>
+    <%= hidden_field_tag :deal_id, params[:deal_id] %>
+
+    <% cookies[:target_all] = params[:target_rule][:all] %>
+    <a class="edgyBlueButton nomargin" onClick="history.go(-1); ">Previous</a>
+   
+    <div class="floatRight">
+      <%= link_to 'Save', save_path(:deal_id => params[:deal_id]), :class=>'edgyBlueButton nomargin' %>
+    </div>
+   <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="panel">
+  <div class="head"><h3>Manage Classifieds</h3></div>
+  <div class="inside nopadding">
+    <table class="data">
+      <tbody>
+      <% if @admin_classifieds.length>0%>
+      <% i=1 %>
+      <% @admin_classifieds.each do |admin_classified| %>
+          <tr >
+            <td style="width:700px"><strong>Classified <%= i %>: </strong><%= admin_classified.name%></td>
+            <% #todo @fakhar these categories should be static  %>
+            <%#*<td>%>
+              <%#= Admin::ClassifiedCategory.find(admin_classified.classified_category_id).name %>
+            <%#*</td>%>
+            <td class="textAlignRight">
+              <%= link_to 'Edit', edit_admin_classified_path(admin_classified), class: "edgyBlueButton" %>
+              <%= link_to 'Delete', admin_classified, class: "edgyBlueButton", method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% i+=1 %>
+      <% end %>
+          <% else %>
+      &nbsp;&nbsp;&nbsp;&nbsp;<%="There is no Classified setup in the system. Please add one to get started."%>
+    <%end%>
+     </tbody></table>
+    <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+</div>

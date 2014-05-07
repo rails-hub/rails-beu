@@ -1,0 +1,21 @@
+<h1>Listing admin_bases</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_bases.each do |admin_basis| %>
+  <tr>
+    <td><%= link_to 'Show', admin_basis %></td>
+    <td><%= link_to 'Edit', edit_admin_basis_path(admin_basis) %></td>
+    <td><%= link_to 'Destroy', admin_basis, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Base', new_admin_basis_path %>

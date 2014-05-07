@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  all: false
+  age_category: MyString
+  gender: MyString
+  birthday: MyString
+  past_customer: false
+  start_date: 2012-09-25 17:47:13
+  end_date: 2012-09-25 17:47:13
+  deal: 
+
+two:
+  title: MyString
+  all: false
+  age_category: MyString
+  gender: MyString
+  birthday: MyString
+  past_customer: false
+  start_date: 2012-09-25 17:47:13
+  end_date: 2012-09-25 17:47:13
+  deal: 

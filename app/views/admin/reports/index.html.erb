@@ -1,0 +1,234 @@
+<%= form_for @q, :url => admin_reports_path do |f| %>
+  <div id="content" class="content">
+    <%= render :partial => "partials/main_menu" %>
+    <div class="contentInside">
+      <!-- Content goes here-->
+      <h2>Statistics</h2>
+
+      <div class="panel">
+        <div class="head"><h3>Options</h3></div>
+
+
+        <div class="inside">
+          <div class="q1" style="width:250px;">
+            <%= f.label :current_user_zone, "Zones" %>
+            <br/>
+
+            <div class="q" style="width:200px;">
+              <%= f.select :current_user_zone, [["", ""]] + Admin::Zone.order("name ASC").collect { |zone| [zone.name, zone.id] }, {:selected=>(params[:search][:current_user_zone] rescue "")} , :class => "reports-zones" %>
+            </div>
+          </div>
+
+          <div class="q1" style="width:250px;">
+            <%= f.label :user_current_store, "Select a Retailer" %>
+            <br/>
+
+            <div class="q" style="width:200px;">
+              <%= f.select :user_current_store, ([["", ""]] + User.joins(:zones).where(:admin_zones=>{:id=>params[:search][:current_user_zone]}).collect { |u| [u.name, u.id] } rescue [["", ""]]), {:selected=>(params[:search][:user_current_store] rescue "")},:class => "reports-users-lists" %>
+            </div>
+          </div>
+
+          <div class="q1" style="width:250px;">
+            <%= f.label :id_eq, "Select a campaign" %>
+            <br/>
+            <div class="q" style="width:200px;">
+              <%= f.select :id_eq, ([["", ""]] + deals_list_for(params[:search][:user_current_store])  rescue  [["", ""]]), {:selected=>(params[:search][:id_eq] rescue "")}, :class => "report-campaign-list" %>
+            </div>
+          </div>
+          <%= f.submit "Search", :class => "edgyBlueButton", :style => "margin-left: 3px; margin-top: 10px; " %>
+          <div class="clear"></div>
+        </div>
+
+      </div>
+      <div class="divider"></div>
+
+      <div class="panel">
+        <div class="head"><h3>Statistics</h3></div>
+        <div class="inside">
+          <div class="q3">
+            <a class="tabBlueButton" href="">Data Frequency
+              </a>
+              <br/>
+
+
+
+
+
+            <div class="dataSection" id="mapgraph-container" style="height: 400px;">
+              <div class="graph" style="height:410px;">
+                <div class="graphContent" style="width: 700px; float: left;">
+                  <div class="graphTitle">
+<!--                     <h3>Graph Title</h3>
+ -->                    Results for <%= @current_date_label %>
+                  </div>
+                  <br/>
+
+                  <div id="graph-container" style="width: 700px; height: 300px;"></div>
+                </div>
+
+                <div class="graphStats" style="width: 180px; float: left;">
+                  <h3><%= count_arr_for @deals_view_users %></h3>
+                  Coupons Generated<br/><br/>
+
+                  <h3><%= count_arr_for @redeemed_deals %></h3>
+                  Coupons Redeemed<br/><br/>
+
+                  <div class="graphMap">
+                    <div class="graphMapIcon" style="background-color:#6bb2e3;"></div>
+                    <br/>
+
+                    <div class="graphMapIcon" style="background-color:#2775a9;"></div>
+                    <br/>
+                  </div>
+                </div>
+
+                <div class="clear"></div>
+              </div>
+            </div>
+
+
+
+
+          </div>
+          <div>
+            <br/>
+
+
+            <div class="q1" style="width:270px;">
+              <%= radio_button_tag :selected_date_filter_type, "current", params[:selected_date_filter_type] == "current"  %>
+              <label for="selected">Selected:</label><br/>
+              <select>
+                <option>This Month</option>
+              </select><br/>
+            </div>
+            <div class="q1" style="width:280px;">
+              <%= radio_button_tag :selected_date_filter_type, "selected_day", params[:selected_date_filter_type]  == "selected_day" %>
+              <label for="selectedDay">Selected Day:</label><br/>
+              <%= text_field_tag :current_date, (params[:current_date] if params[:selected_date_filter_type] == "selected_day"), :class=>"datepicker" %>
+              <br/>
+            </div>
+            <div class="q1 nomargin" style="width:293px;">
+              <br/>
+              <%= link_to image_tag("/images/icons/pdf.png")+ "PDF Report", admin_reports_path(params.merge!({:format=>"pdf"})),  :class=>"iconBlueButton" %>
+              <%= link_to image_tag("/images/icons/xls.png")+ "XLS Report", admin_reports_path(params.merge!({:format=>"xls"})),  :class=>"iconBlueButton" %>
+              <%#*<a class="iconBlueButton nomargin" href="#"><img src="/images/icons/xls.png" width="18" height="19" alt="PDF"/>XLS%>
+                <%#*Report</a><br/><br/>%>
+            </div>
+            <div class="clear"></div>
+
+            <div class="q1" style="width:280px;">
+
+              <%= radio_button_tag :selected_date_filter_type, "selected_month", params[:selected_date_filter_type] == "selected_month" %>
+              <label for="selected">Selected Month:</label><br/>
+
+              <div class="q" style="width:110px;">
+                <%= select_tag :filter_month, options_for_select(Date::MONTHNAMES.each_with_index.collect { |m, i| [m, i] }, ( params[:filter_month] if params[:selected_date_filter_type] == "selected_month")) %>
+              </div>
+              <div class="q nomargin" style="width:130px;">
+                <%= select_tag :filter_year, options_for_select(DateTime.now.year.downto(2010).collect { |d| [d, d] }, ( params[:filter_year] if params[:selected_date_filter_type] == "selected_month")) %>
+              </div>
+            </div>
+            <div class="q1" style="width:280px; margin-top:5px; margin-left: -9px;">
+              <%= radio_button_tag :selected_date_filter_type, "range_selection", params[:selected_date_filter_type] == "range_selection" %>Date
+              Range:</label><br/>
+              <div class="q" style="width:130px;">
+                <%= text_field_tag :start_date, (params[:start_date] if params[:selected_date_filter_type] == "range_selection"), :class=>"datepicker" %>
+              </div>
+              <div class="q nomargin" style="width:130px;">
+                <%= text_field_tag :stop_date, (params[:stop_date] if params[:selected_date_filter_type] == "range_selection"), :class=>"datepicker" %>
+              </div>
+            </div>
+            <div class="q1 nomargin" style="width:280px;">
+              <br/>
+              <a href="#">Download the latest Report</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <!-- <a href="#"><span class="icon refresh"></span>Refresh</a><br/> -->
+            </div>
+
+            <br/>
+          </div>
+
+          <div class="clear"></div>
+        </div>
+      </div>
+      
+
+      <!-- <div class="divider"></div>
+      <br/>
+      <a class="tabBlueButton" href="#">Detailed Log</a>
+      <a class="tabBlueButton" href="#">Chart Data</a>
+
+      <div class="panel noheading">
+        No Data Available
+      </div>
+       -->
+
+      <div class="clear"></div>
+      <!-- Content ends here-->
+    </div>
+  </div>
+
+  </div><!-- #content-->
+<% end %>
+
+<script type="text/javascript">
+  $(function () {
+
+    // if IE is less then 8.
+    if ($.browser.msie && $.browser.version.substr(0,1)<7) {
+      //IE7 
+      $("#mapgraph-container").hide();
+    }
+    else
+    {
+      var chart;
+      $(document).ready(function () {
+        $(".datepicker").datepicker({dateFormat: "yy-mm-dd"});
+        chart = new Highcharts.Chart({
+          chart:{
+            renderTo:'graph-container',
+            type:'line',
+          },
+          title:{
+            text:'Coupons Statistics',
+            x:-20 //center
+          },
+          xAxis:{
+            categories: <%= @graph_x.html_safe %>
+          },
+          yAxis:{
+            title:{
+              text:'Total'
+            },
+            plotLines:[
+              {
+                value:-5,
+                width:1,
+                color:'#808080'
+              }
+            ]
+          },
+          legend:{
+            layout:'vertical',
+            align:'right',
+            verticalAlign:'top',
+            x:-10,
+            y:100,
+            borderWidth:0
+          },
+          series:[
+            {
+              name:'Generated',
+              data: <%= @deals_view_users.to_json %>
+            },
+            {
+              name:'Redeemed',
+              data: <%= @redeemed_deals.to_json %>
+
+            }
+          ]
+        });
+      });
+    }
+  });
+
+</script>

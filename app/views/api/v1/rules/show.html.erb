@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @rule.name %>
+</p>
+
+<p>
+  <b>All age:</b>
+  <%= @rule.all_age %>
+</p>
+
+<p>
+  <b>Age from:</b>
+  <%= @rule.age_from %>
+</p>
+
+<p>
+  <b>Age to:</b>
+  <%= @rule.age_to %>
+</p>
+
+<p>
+  <b>Gender:</b>
+  <%= @rule.gender %>
+</p>
+
+
+<%= link_to 'Edit', edit_api_v1_rule_path(@rule) %> |
+<%= link_to 'Back', api_v1_rules_path %>

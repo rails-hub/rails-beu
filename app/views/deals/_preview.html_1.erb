@@ -1,0 +1,41 @@
+<% img = DealsHelper.get_back_image_url(deal, tmp_img)%>
+<div id="dynamic_p" style="<%=  preveiw_style(img, deal) %>"  >
+
+  <div id="inner_p">
+    <% front_image= get_front_img_url(deal, tmp_img) %>
+    <% if front_image.present? %>
+
+    <span class="p_image" id="img_container" style="<%=  front_image_container_css(deal, tmp_img)%>">
+      <img src="<%= front_image %>" width="100%" height="100%" alt="Preview" />
+    </span>
+    <%end%>
+    <br/>
+    <span  id="text" style="<%= description_style(deal, tmp_img) %>">
+
+      <%=  get_description(deal) %>
+
+    </span>
+  </div>
+</div>
+<%#*minHeight: 100,%>
+<%#*minWidth: 100,%>
+<script type="text/javascript">
+
+  $(function(){
+
+     $( "#img_container, #text" ).resizable({ghost: true,
+        maxHeight: 200,
+        maxWidth: 240,
+       stop: function(){
+        save_style_data($(this));
+      }
+      });
+
+    $( "#img_container, #text" ).draggable({ containment: "#dynamic_p", stop: function(){
+            save_style_data($(this));
+          }
+          });
+
+});
+
+</script>

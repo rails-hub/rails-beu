@@ -1,0 +1,158 @@
+
+<%content_for :title, 'beam-e-up | Coupon Creation'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+  <%= stylesheet_link_tag    "/stylesheets/colorpicker/colorpicker", :media => "all" %>
+  <%= stylesheet_link_tag    "/stylesheets/colorpicker/layout", :media => "all" %>
+
+
+    <div class="content">
+      <%= render :partial=> 'partials/main_menu' %>
+      <div class="contentInside">
+        <!-- Content goes here-->
+        <div class="steps">
+          <div class="step current one">
+            <div class="number">1</div><br /><br />Coupon Creation
+          </div>
+          <div class="step two">
+            <div class="number">2</div><br /><br />Campaign Parameters Setup
+          </div>
+          <div class="step three">
+            <div class="number">3</div><br /><br />Review &amp; Submit
+          </div>
+        </div>
+
+        <div class="panel">
+          <%= render :partial => 'temp_images' %>
+          
+          <%= form_for(@deal, :url => compaign_params_deals_path, :html=>{:method => :get, :onsubmit=>'set_color()', :id=>:deal_form, :class=>:deal_form}) do |f| %>
+          <div class="head"><h3>Coupon Creation</h3></div>
+          <% if @deal.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@deal.errors.count, "error") %> prohibited this deal from being saved:</h2>
+
+                <ul>
+                  <% @deal.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                  <% end %>
+                </ul>
+              </div>
+            <% end %>
+
+          
+          <%= hidden_field_tag :deal_id, @deal.id%>
+          <div class="inside nopadding">
+            <div class="q" style="width: 586px;">
+              <div class="plain">
+                <h3>Background</h3>
+                <div>
+                <label>Select a Background Image:</label>
+                 <% if session[:back_image]=="true" or session[:back_image].blank? %>
+                  <%= f.radio_button :back_image_or_color, true, {:checked => true,:class=>'radio_b  preview_change'} %>
+                 <%else%>
+                  <%= f.radio_button :back_image_or_color, true, {:class=>'radio_b  preview_change'} %>
+                 <%end%>
+                
+                <input type="button" id="upload" name="upload" value="Upload Image" class='edgyBlueButton cookie_setter' onclick="upload_img($(this)); set_background(true);" />
+                <% if  session[:back_image]=='false' %>
+                  <%= f.radio_button :back_image_or_color, false, {:checked => true,:class=>'radio_b'} %>
+                <%else%>
+                  <%= f.radio_button :back_image_or_color, false, :class=>'radio_b' %>
+                <%end%>
+               
+                <label>Or Select background color:</label>
+                <div id="colorSelector"><div style="background-color: #fff"></div></div>
+                <%= f.hidden_field :background_color, :value=>session[:deal_background_color], :class=>'preview_change'  %>
+                </div>
+                <div class="spacer"></div>
+
+                <div class="divider"></div><br />
+
+                <div class="q" style="width:500px;">
+                  <h3>Add Text Descriptions/Coupon Terms</h3>
+                  <input type="hidden" name="offer_description" id="offer_description" value="<%= get_coupen_offer %>"/>
+                  <%= f.text_area :description, :cols => 80, :rows => 6, :placeholder=>'Enter Your text here', :value => session[:deal_description], :class => 'preview_change' %>
+                </div>
+
+                <div class="q nomargin" style="width:250px;">
+                  <h3>Font</h3>
+                    <div class="q" style="width:100px;">
+                      <%= f.select :font_name, ['helvetica','Times New Roman'] ,{:selected => @deal.font_name} ,{ :class => 'preview_change'} %>
+                    </div>
+                    <div class="q" style="width:50px;">
+                      <%= f.text_field :font_color, :class => " preview_change color {hash:true,caps:false}", :value => get_font_color(session[:deal_font_color], @deal.font_color) %>
+                    </div>
+                    <div class="q nomargin custom_selector" style="width:60px;">
+                      <%= f.select :font_size, ['10','11','12','13'],{:selected => @deal.font_size}, {:class => 'preview_change'} %>
+                    </div><br />
+                    
+                    <% if session[:deal_bold]=="true" %>
+                    <%= f.check_box :bold,{:checked => 'checked', :class => 'preview_change'} %>
+                    <%else%>
+                      <%= f.check_box :bold, :class => 'preview_change' %>
+                    <%end%>
+                    <%= f.label :bold %>&nbsp;&nbsp;&nbsp;
+                    <% if session[:deal_italic]=="true" %>
+                    <%= f.check_box :italic,{:checked => 'checked', :class => 'preview_change'} %>
+                    <%else%>
+                      <%= f.check_box :italic, :class => 'preview_change' %>
+                    <%end%>
+                    <%= f.label :italic %>&nbsp;&nbsp;&nbsp;
+                    <% if session[:deal_underline]=="true" %>
+                    <%= f.check_box :underline,{:checked => 'checked', :class => 'preview_change'} %>
+                    <%else%>
+                      <%= f.check_box :underline, :class => 'preview_change' %>
+                    <%end%>
+                    <%= f.label :underline %>&nbsp;&nbsp;&nbsp;
+                    <br /><br />
+
+                    
+                    <%= link_to 'Deal Wizard', objectives_deals_wizards_path(:deal_id => @deal.id), :class=>"edgyBlueButton nomargin cookie_setter" %>
+                    <div class="clear"></div><br />
+
+                </div>
+                <div class="divider"></div><br />
+                <%= render :partial => 'upload_item_retailer_image' %>
+
+                <h3>Coupon Name</h3>
+                <label for="couponName">Coupon Name:</label>
+                <%= f.text_field :title,  {:placeholder=>'New Coupon',:value=> get_value(cookies[:deal_title], @deal.title), :style=>"width:200px; margin-left:20px;" }  %>
+               
+                <div class="clear"></div>
+              </div>
+            </div>
+
+            <div class="q" style="width:300px!important; height:300px!important; text-align:center;">
+              <br />
+              <%#*<input type="button" id="preview" name="preview" value="Preview" class='edgyBlueButton nomargin' onclick="preview_coupen($(this))"/>%>
+              <br /><br />
+              <%#*<iframe id="preview_form" width='240px;' height='200px;' src="/deals/set_preview"></iframe>%>
+              <div class="preview" style="background-color:rgb(245, 245, 245)">
+                <%= render :partial => 'preview', :locals=>{:deal => @deal, :tmp_img => @tmp_img, :deal_wizard => @deal_wizard} %>
+                <input type="hidden" id="new_deal" name="new_deal" value="false"/>
+              </div>
+            </div>
+            <%= link_to 'Archive Content', archive_contents_path, :class=>"edgyBlueButton floatRight", :style=>"clear: both;margin-bottom: 15px;margin-right: 100px" %>
+            <div class="clear"></div>
+            <div class="clear"></div>
+          </div>
+        </div>
+
+        <div class="floatRight">
+          <%= f.submit 'Next', :class=>"nextbutton nomargin cookie_setter"  %>
+        </div>
+ <%end%>
+        <div class="clear"></div>
+        <!-- Content ends here-->
+      </div>
+    </div>
+
+<script type="text/javascript">
+
+  $(function(){
+    save_session();
+
+  });
+
+  
+</script>

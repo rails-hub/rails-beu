@@ -1,0 +1,122 @@
+<%  if current_user.role_id==Role::ADMIN_USER_ID %>
+  <%= render 'form', page: 'edit' %>
+<%else%>
+  <%= render 'retailer_form' %>
+<%end%>
+
+
+<script type="text/javascript">
+  $(function() {
+    $('#rdoself').click();
+    $('#rdoself').parent().click();
+    $('#plan_9').click();
+    $('#plan_9').parent().click();
+
+
+    // default values
+    $("#campPerMonth").html("Unlimited");
+
+    $('#plan_9').click(function (){
+      $('#subPlan').html("Platinum");
+      $('#campPerMonth').html("Unlimited");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("1099");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("999");
+      }
+    })
+
+    $('#plan_10').click(function (){
+      $('#subPlan').html("Gold");
+      $('#campPerMonth').html("15");
+
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("569");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("499");
+      }
+
+    })
+
+    $('#plan_11').click(function (){
+      $('#subPlan').html("Silver");
+      $('#campPerMonth').html("10");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("449");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("399");
+      }
+    })
+    $('#plan_12').click(function (){
+      $('#subPlan').html("Bronze");
+      $('#campPerMonth').html("5");
+      if ($('#rdofull').prop('checked'))
+      {
+        $("#dueamount").html("349");
+      }
+      if ($('#rdoself').prop('checked'))
+      {
+        $("#dueamount").html("299");
+      }
+    })
+
+
+  });
+</script>
+
+<script type="text/javascript">
+<%#*alert('true');%>
+  $(document).ready(function() {
+<%if @user.subscription_details.first.plan_id > 12 and @user.subscription_details.first.plan_id == 13%>
+      $('#rdoself').parent().removeClass('checked');
+      $('#rdofull').attr('checked', true);
+      $('#plan_9').attr('checked', true);
+      $('#rdofull').parent().addClass('checked');
+      $('#plan_9').parent().addClass('checked');
+      $('#rdofull').click();
+      $('#plan_9').click();
+<%elsif @user.subscription_details.first.plan_id > 12 and @user.subscription_details.first.plan_id == 14%>
+      $('#rdoself').parent().removeClass('checked');
+      $('#rdofull').attr('checked', true);
+      $('#plan_10').attr('checked', true);
+      $('#rdofull').click();
+      $('#rdofull').parent().addClass('checked');
+      $('#plan_10').parent().addClass('checked');
+      $('#plan_10').click();
+<%elsif @user.subscription_details.first.plan_id > 12 and @user.subscription_details.first.plan_id == 15%>
+      $('#rdoself').parent().removeClass('checked');
+      $('#rdofull').attr('checked', true);
+      $('#plan_11').attr('checked', true);
+      $('#rdofull').parent().addClass('checked');
+      $('#plan_11').parent().addClass('checked');
+      $('#rdofull').click();
+      $('#plan_11').click();
+<%elsif @user.subscription_details.first.plan_id > 12 and @user.subscription_details.first.plan_id == 16%>
+      $('#rdoself').parent().removeClass('checked');
+      $('#rdofull').attr('checked', true);
+      $('#plan_12').attr('checked', true);
+      $('#rdofull').parent().addClass('checked');
+      $('#plan_12').parent().addClass('checked');
+      $('#rdofull').click();
+      $('#plan_12').click();
+<%else%>
+      $('#rdoself').attr('checked', true);
+      $('#rdofull').parent().removeClass('checked');
+      $('#rdoself').parent().addClass('checked');
+      $('#plan_<%=@user.subscription_details.first.plan_id unless @user.subscription_details.blank? and @user.subscription_details.first.blank?%>').attr('checked', true);
+      $('#plan_<%=@user.subscription_details.first.plan_id unless @user.subscription_details.blank? and @user.subscription_details.first.blank?%>').parent().addClass('checked');
+      $('#rdoself').click();
+      $('#plan_<%=@user.subscription_details.first.plan_id unless @user.subscription_details.blank? and @user.subscription_details.first.blank?%>').click();
+<%end%>
+<%#*alert('true');%>
+  });
+</script>

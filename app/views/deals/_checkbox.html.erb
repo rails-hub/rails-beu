@@ -1,0 +1,8 @@
+
+<%= puts "value=========#{value.inspect}====#{name.inspect}" %>
+<%if value== "true"%>
+<input id="<%= "deal_#{name}" %>" name="<%= "deal[#{name}]" %>" type="checkbox" value="1" style="opacity: 0;" checked='checked' />
+<%else%>
+<input id= "<%= "deal_#{name}" %>" name="<%= "deal[#{name}]" %>" type="checkbox" value="1" style="opacity: 0;"  />
+
+<%end%>

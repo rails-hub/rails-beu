@@ -1,0 +1,21 @@
+<h1>Listing temp_images</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @temp_images.each do |temp_image| %>
+  <tr>
+    <td><%= link_to 'Show', temp_image %></td>
+    <td><%= link_to 'Edit', edit_temp_image_path(temp_image) %></td>
+    <td><%= link_to 'Destroy', temp_image, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Temp image', new_temp_image_path %>

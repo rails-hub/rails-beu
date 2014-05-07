@@ -1,0 +1,25 @@
+<h1>Listing user_stores</h1>
+
+<table>
+  <tr>
+    <th>User</th>
+    <th>Store</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @user_stores.each do |user_store| %>
+  <tr>
+    <td><%= user_store.user_id %></td>
+    <td><%= user_store.store_id %></td>
+    <td><%= link_to 'Show', api_v1_user_store_path(user_store) %></td>
+    <td><%= link_to 'Edit', edit_api_v1_user_store_path(user_store) %></td>
+    <td><%= link_to 'Destroy', api_v1_user_store_path(user_store), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New User store', new_api_v1_user_store_path %>

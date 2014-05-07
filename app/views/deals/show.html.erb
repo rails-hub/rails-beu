@@ -1,0 +1,58 @@
+<%content_for :title, 'beam-e-up | Review Campaign'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+ 
+
+    <div class="panel">
+      <div class="head"><h3>Review Campaign</h3></div>
+      <div class="inside">
+        <div class="q" style="width: 586px;"><br />
+          <label class="static">Campaign Name: </label><strong><%= campaign_name(@target_rule.name) %></strong><br /><br />
+          <label class="static">Age Category: </label><strong><%=  get_age_categories(@target_rule) %></strong><br /><br />
+          <label class="static">Gender: </label><strong><%= get_genders(@target_rule)%></strong><br /><br />
+          <label class="static">Past Customer: </label><strong><%= allowed_customer(@target_rule)%></strong><br /><br />
+          <label class="static">Gift or Seasonal Item: </label><strong><%=gift_or_seasonal_item(@target_rule.gift_or_seasonal_item) %></strong><br /><br />
+          <label class="static">Campaign Start Date: </label><strong><%= get_start_date(@target_rule.start_date,@target_rule.stoday) %></strong><br /><br />
+          <label class="static">Campaign End Date: </label><strong><%= @target_rule.end_date.present? ? @target_rule.end_date.strftime('%B %d, %Y') : 'N/A' %></strong><br />
+          
+        </div>
+
+        <div class="q nomargin" style="width:242px; text-align:center;">
+          <br />
+            <div class="preview" >
+              <% coupon_img=url_generator(@deal.coupen_image)%>
+              <img src="<%=  coupon_img %>" alt="coupon image" />
+              <input type="hidden" id="new_deal" name="new_deal" value="true"/>
+            </div>
+        <div class="clear"></div><br />
+        
+              <%# coupon_img=url_generator(@deal.coupen_large_img)%>
+        
+              
+        
+        </div>
+
+        <div class="clear"></div><br />
+      </div>
+    </div>
+    <%= hidden_field_tag :deal_id, params[:deal_id] %>
+
+
+    <%#*<a class="edgyBlueButton nomargin" onClick="history.go(-1); ">Previous</a>%>
+    <%= link_to 'Previous', deals_path, :class=> "edgyBlueButton nomargin" %>
+    <%#*<a class="edgyBlueButton nomargin" onClick="history.go(-1); click_all(true)">Previous</a>%>
+
+    <div class="floatRight">
+      <%= link_to 'Edit', edit_deal_path(@deal), :class=>'edgyBlueButton nomargin' %>
+    </div>
+   <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+

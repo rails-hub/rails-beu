@@ -1,0 +1,48 @@
+<div style="display:none;">
+ <%= hidden_field_tag :hback_image_or_color, session[:back_img_color] %>
+ <%= hidden_field_tag :hback_color,  session[:back_color] %>
+  <div id="upload_f" class="upload_box">
+    <br/>
+    <h3>Upload Logo Image</h3>
+    <%= form_for @tmp_img, :url => temp_images_url, :html => {:method=>:post, :multipart => true, :class=>"ajax-form" }, :remote=> true do |f| %>
+      <%= hidden_field_tag :deal_id, @deal.id unless @deal.new_record? %>
+      <%= f.label :logo_image , 'Background Image'%><br/><br/>
+      <%= f.file_field :logo_image %><br/>
+      (only images jpeg/gif/png)<br/><br/>
+      <%= f.hidden_field :session_id, :value=> session[:session_id] %>
+      <%= f.hidden_field :back_color %>
+      <%= f.hidden_field :back_img_color %>
+
+     
+      <%= f.submit 'Upload', :class=>'edgyBlueButton' , :onclick=>"values_setter('#temp_image_')"%><br/>
+    <% end %>
+  </div>
+  <div id="upload_retail" class="upload_box" >
+    <br/>
+    <h3>Upload Retailer Image</h3>
+    <%= form_for @tmp_img, :url => temp_images_url, :html => {:method=>:post, :multipart => true, :class=>"ajax-form"  }, :remote=>true do |f| %>
+      <%= hidden_field_tag :deal_id, @deal.id unless @deal.new_record? %>
+      <%= f.label :retail_image %><br/><br/>
+      <%= f.file_field :retail_image %><br/>
+      (only images jpeg/gif/png)<br/><br/>
+      <%= f.hidden_field :session_id, :value=> session[:session_id] %>
+      <%= f.hidden_field :back_color %>
+      <%= f.hidden_field :back_img_color %>
+      <%= f.submit 'Upload', :class=>'edgyBlueButton' , :onclick=>"values_setter('#temp_image_')" %><br/>
+    <% end %>
+  </div>
+  <div id="upload_item_div" class="upload_box" >
+    <br/>
+    <h3>Upload Item Image</h3>
+    <%= form_for @tmp_img, :url => temp_images_url, :html => {:method=>:post, :multipart => true, :class=>"ajax-form"  }, :remote=>true do |f| %>
+      <%= hidden_field_tag :deal_id, @deal.id unless @deal.new_record? %>
+      <%= f.label :thing_image %><br/><br/>
+      <%= f.file_field :thing_image %><br/>
+      (only images jpeg/gif/png)<br/><br/>
+      <%= f.hidden_field :session_id, :value=> session[:session_id] %>
+      <%= f.hidden_field :back_color %>
+      <%= f.hidden_field :back_img_color %>
+      <%= f.submit 'Upload', :class=>'edgyBlueButton' , :onclick=>"values_setter('#temp_image_')" %><br/>
+    <% end %>
+  </div>
+</div>

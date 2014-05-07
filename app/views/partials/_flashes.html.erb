@@ -1,0 +1,15 @@
+  <%  if flash[:notice] %>
+    <div class=" notification success hideable">
+      <p>
+        <%= flash[:notice].to_s.html_safe %>
+      </p>
+    </div>
+  <%end%>
+  <% if flash[:error] %>
+    <div class=" notification failure hideable">
+      <p>
+        <%= flash[:error]%>
+      </p>
+    </div>
+  <%end%>
+        

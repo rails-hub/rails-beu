@@ -1,0 +1,24 @@
+<div id="credit_card_info_div">
+  <% if @user.credit_card_informations.inactive.present? %>
+    <table>
+      <thead>
+        <tr>
+          <th>Card Number</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @user.credit_card_informations.inactive.each do |credit| %>
+          <tr>
+            <td><%= credit.card_number %></td>
+            <td><%= link_to "Active", credit_card_information_path(credit, :user_id=>@user.id, :credit_card_information=> { :is_active => true }), :remote=>true, :method=>:put %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+  <%= render :partial=>"credit_card_informations/card_information", :locals=>{:credit_card=>@credit_card_information} %>
+  <h2>Add new credit card</h2>
+  <hr />
+  <%= render :partial=>"credit_card_informations/card_information", :locals=>{:credit_card=>CreditCardInformation.new} %>
+</div>

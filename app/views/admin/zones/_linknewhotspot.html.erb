@@ -1,0 +1,17 @@
+<div class="inside nopadding">
+<table class="data">
+  <tbody>
+  <%= form_for(admin_hotspot, :url => admin_hotspot_path(admin_hotspot), :html=>{:method => :put}) do |f| %>
+  <tr>
+  
+  <td  ><%=admin_hotspot.name%></td>
+  <%= f.hidden_field :zone_id, :value=>admin_hotspot.zone_id %>
+  <td class="textAlignRight">  
+     <%= f.hidden_field :called_by ,style: "width:250px;", :value=>'link'%>
+<%= f.submit 'Link', :class => "edgyBlueButton nomargin floatRight;" %>
+  </td>
+  </tr>
+  <% end %>
+  </tbody>
+  </table>
+    </div>

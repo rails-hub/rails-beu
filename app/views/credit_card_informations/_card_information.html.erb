@@ -1,0 +1,47 @@
+<%= form_for(credit_card, :html=>{:id=>'credit_card_form'}, :remote => true) do |f| %>
+
+  <br/><br/><br/>
+  <% if credit_card.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(credit_card.errors.count, "error") %> prohibited this credit_card_information from being saved:</h2>
+
+      <ul>
+        <% credit_card.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :full_name, 'Full Name:' %>
+    <%= f.text_field :full_name,:value =>"#{credit_card.first_name} #{credit_card.last_name}" %>
+  </div>
+  <div class="field">
+    <%= f.label :card_number, 'Card Number:' %>
+    <%= f.text_field :card_number %>
+  </div>
+  <div class="field">
+    <%= f.label :verification_code, 'Verification Code:' %>
+    <%= f.text_field :verification_code %>
+  </div>
+  <div class="field custom_selector">
+    <%= f.label :expiry_date, 'Expiry Date:' %>
+    <%= f.date_select :expiry_date, :order => [:year, :month] %>
+  </div>
+
+  <div class="field">
+    <%#= f.label :user_id %>
+    <%= f.hidden_field :user_id, :value=>@user.id if @user.id %>
+    <%#= f.text_field :user_id %>
+  </div>
+  <%#*<div class="field">%>
+    <%#= f.label :response %>
+    <%#= f.text_field :response %>
+    <%#*</div>%>
+  <div class="actions" style="text-align: center;">
+    <span></span>
+    <%= f.submit 'Save', :class=>'edgyBlueButton nomargin link_button' %>
+  </div>
+
+<% end %>

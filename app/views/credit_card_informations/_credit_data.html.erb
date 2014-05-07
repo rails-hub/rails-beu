@@ -1,0 +1,36 @@
+<div id="credit_card_info_div">
+
+  <%= f.fields_for :credit_card_information do |cr| %>
+  
+    <div class="field">
+      <%= cr.label :first_name, 'First Name:' %>
+      <%= cr.text_field :first_name %>
+    </div>
+    <div class="field">
+      <%= cr.label :last_name, 'Last Name:' %>
+      <%= cr.text_field :last_name %>
+    </div>
+    <div class="field">
+      <%= cr.label :card_number, 'Card Number:' %>
+      <%= cr.text_field :card_number %>
+    </div>
+    <div class="field custom_selector">
+      <%= cr.label :expiry_date, 'Expiry Date:' %>
+      <%= cr.date_select :expiry_date, :order => [:year, :month] %>
+    </div>
+
+    <div class="field">
+      <%= cr.hidden_field :user_id, :value=>@user.id if @user.id %>
+    </div>
+
+    <div class="field">
+      <%= cr.label :response %>
+      <%= cr.text_field :response %>
+    </div>
+
+  <% end %>
+</div>
+
+
+
+

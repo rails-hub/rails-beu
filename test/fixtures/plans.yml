@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  price: 1.5
+  duration: 
+  expiry: 2012-10-08 21:01:49
+
+two:
+  title: MyString
+  price: 1.5
+  duration: 
+  expiry: 2012-10-08 21:01:49

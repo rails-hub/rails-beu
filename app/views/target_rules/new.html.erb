@@ -1,0 +1,59 @@
+<%content_for :title, 'beam-e-up | Review Campaign &amp; Submit'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="steps">
+      <div class="step past one">
+        <div class="number">1</div><br /><br />Coupon Creation <img src="/images/checked.png" width="11" height="8" alt="Done"/>
+      </div>
+      <div class="step past two">
+        <div class="number">2</div><br /><br />Campaign Parameters Setup <img src="/images/checked.png" width="11" height="8" alt="Done"/>
+      </div>
+      <div class="step current three">
+        <div class="number">3</div><br /><br />Review &amp; Submit
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="head"><h3>Review Campaign &amp; Submit</h3></div>
+      <div class="inside">
+        <div class="q" style="width:670px;"><br />
+          <label class="static">Campaign Name: </label><strong><%= @target_rule.name %></strong><br /><br />
+          <label class="static">Age Category: </label><strong><%=  @target_rule.age_category %></strong><br /><br />
+          <label class="static">Gender: </label><strong><%= @target_rule.gender==true ? 'Male' : 'Female'%></strong><br /><br />
+          <label class="static">Past Customer: </label><strong><%= @target_rule.past_customer==true ? 'Yes' : 'No'%></strong><br /><br />
+          <label class="static">Campaign Start Date: </label><strong>October 5, 2011</strong><br /><br />
+          <label class="static">Campaign End Date: </label><strong>October 12, 2011</strong><br />
+        </div>
+
+        <div class="q nomargin" style="width:200px; text-align:center;">
+          <br />
+          <div class="preview">
+            <% if @deal.present? and @deal.coupen_image.present? %>
+                 <span><img src="<%= @deal.coupen_image%>" width="118" height="118" alt="Preview"/></span>
+                <%else%>
+                <span><img src="/images/gap.jpg" width="118" height="118" alt="Preview"/></span>
+                <%end%>
+            <span><img src="/images/gapText.jpg" width="142" height="57" alt="Preview"/></span>
+          </div>
+        </div>
+
+        <div class="clear"></div><br />
+      </div>
+    </div>
+<%#= f.text_field :deal_id, :value=>params[:deal_id] %>
+
+    <a class="edgyBlueButton nomargin" onClick="history.go(-1)">Previous</a>
+    
+    <div class="floatRight">
+      <%= link_to 'Save', target_rules_path(:target_rule=>params[:target_rule]), :method=> :post, :class=>'edgyBlueButton nomargin' %>
+    </div>
+   <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>

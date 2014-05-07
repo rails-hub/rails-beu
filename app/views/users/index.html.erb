@@ -1,0 +1,42 @@
+<%  content_for :title, 'beam-e-up | Retailers' %>
+<%  content_for :keywords, '' %>
+<%  content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="panel">
+
+        <div class="head"><h3>Manage Retailers</h3></div>
+        <div class="inside nopadding">
+          <table class="data">
+            <tbody>
+            <% if @users.length>0%>
+            <% i=1 %>
+            <% @users.each do |user| %>
+            <tr>
+              <td><strong>Retailer <%= i %>: </strong><%= user.business_name %></td>
+              <td><%= user.name %></td>
+              <td><%= user.mobile %></td>
+              <td><%= user.email %></td>
+              <td class="textAlignRight"><%= link_to 'Edit', edit_user_path(user),class: "edgyBlueButton" %><%= link_to 'Delete', user, method: :delete,class: "edgyBlueButton", data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+                <% i+=1 %>
+            <% end %>
+                <%else%>
+                &nbsp;&nbsp;&nbsp;&nbsp; <%="No Retailer Account found in the system. Please add one to get started."%>
+           <%end%>
+            </tbody></table>
+          <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+    <%= link_to 'Add Retailer', new_user_path, :class => "edgyBlueButton nomargin floatRight" %>
+    <div class="clear"></div>
+
+    <!-- Content ends here-->
+  </div>
+</div>

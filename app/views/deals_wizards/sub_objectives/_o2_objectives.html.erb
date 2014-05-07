@@ -1,0 +1,23 @@
+
+<%= radio_button_tag '2[0]','1', true,:class => "data_restrict" %><h3>Gift/Seasonal</h3><br /><br />
+
+    <div id="d_2_0_1" class="show toggle_d">
+      <%= radio_button_tag '2[1]','1' %> Come celebrate &nbsp;<%= text_field_tag '2[1_1][1]'%> with us and receive &nbsp;<%= text_field_tag '2[1_1][2]'%> % off your purchase storewide!<br /><br/>
+      <%= radio_button_tag '2[1]','2' %> Come celebrate &nbsp;<%= text_field_tag '2[1_2][1]'%> with us. Spend $ &nbsp;<%= text_field_tag '2[1_2][2]'%> or more in store and receive $ &nbsp;<%= text_field_tag '2[1_2][3]'%> off your purchase!<br /><br/>
+      <%= radio_button_tag '2[1]','3' %> Come celebrate &nbsp;<%= text_field_tag '2[1_3][1]'%> with us. Spend $ &nbsp;<%= text_field_tag '2[1_3][2]'%> or more in store and receive  &nbsp;<%= text_field_tag '2[1_3][3]'%> % off your purchase!<br /><br/>
+      <%= radio_button_tag '2[1]','4' %> Purchase &nbsp;<%= text_field_tag '2[1_4][1]'%> and receive &nbsp;<%= text_field_tag '2[1_4][2]'%> % off!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '2[0]','2', false,:class => "data_restrict" %><h3> Promotional - Storewide</h3><br /><br />
+
+    <div id="d_2_0_2" class="hide toggle_d">
+      <%= radio_button_tag '2[2]','1' %> Present this coupon in store and receive a &nbsp;<%= text_field_tag '2[2_1]'%> !<br /><br/>
+      <%= radio_button_tag '2[2]','2' %> Spend $ &nbsp;<%= text_field_tag '2[2_2][1]'%> in store and receive a &nbsp;<%= text_field_tag '2[2_2][2]'%> with your purchase!<br /><br/>
+    </div>
+
+    <%= radio_button_tag '2[0]','3', false,:class => "data_restrict" %><h3>Group Shopper Coupon </h3><br /><br />
+
+    <div id="d_2_0_3" class="hide toggle_d">
+      <%= radio_button_tag '2[3]','1' %> Come in with &nbsp;<%= text_field_tag '2[3_1][1]'%> or more friends, spend $ &nbsp;<%= text_field_tag '2[3_1][2]'%>or more in store as a group and receive $ &nbsp;<%= text_field_tag '2[3_1][3]'%>off your total group purchase!<br /><br/>
+      <%= radio_button_tag '2[3]','2' %> Come in with &nbsp;<%= text_field_tag '2[3_2][1]'%> or more friends, spend $ &nbsp;<%= text_field_tag '2[3_2][2]'%>or more in store as a group and receive &nbsp;<%= text_field_tag '2[3_2][3]'%> % off your total group purchase!<br /><br/>
+    </div>

@@ -1,0 +1,55 @@
+<%content_for :title, 'beam-e-up | Deal Wizard - 2'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+<script type="text/javascript">
+
+$("#deals_wizard_buy_units").validate({
+  rules: {
+    field: {
+      required: true,
+      number: true
+    }
+  }
+});
+</script>
+<div id="content">
+  <div class="content">
+    <%= render :partial=> 'partials/main_menu' %>
+    <div class="contentInside">
+      <!-- Content goes here-->
+      <div class="panel">
+        <div class="head"><h3>Deal Wizard</h3></div>
+        <div class="inside">
+          <%= form_tag(send_data_deals_wizards_path, { :method => :get, :name=> :deals_wizard, :id => :deals_wizard }) do  %>
+           
+          <h5>Objective:</h5><br/>
+          <%= @selected_objective %>
+          <br />
+
+          Deal Options:<br /><br />
+
+          <div id="offers">
+            <%= hidden_field_tag :compaign_objectives_id,  @compaign_objectives_id %>
+            <%= hidden_field_tag :deal_id, params[:deal_id] %>
+            <%= render :partial => "/deals_wizards/sub_objectives/o#{@compaign_objectives_id}_objectives" %>
+          </div>
+
+        </div>
+      </div>
+      <input type="button" onclick="window.history.go(-1)" class="nextbutton nomargin" value="Previous"  ></input>
+      <div class="floatRight">
+
+        <%= submit_tag 'Next', :class => "nextbutton nomargin", :id => 'validation_applier', :onclick => "createCookie('from_dealwizard',true,0.01) ",:style =>'width:70px' %>
+        
+
+      </div>
+      <%end%>
+      <div class="clear"></div>
+      <!-- Content ends here-->
+    </div>
+  </div>
+
+</div><!-- #content-->
+
+

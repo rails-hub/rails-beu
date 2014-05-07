@@ -1,0 +1,27 @@
+<h1>Listing questions</h1>
+
+<table>
+  <tr>
+    <th>Question</th>
+    <th>Is Active</th>
+    <th>Expiry date</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @questions.each do |question| %>
+  <tr>
+    <td><%= question.name %></td>
+    <td><%= question.is_active %></td>
+    <td><%= question.expiry_date %></td>
+    <td><%= link_to 'Show', api_v1_question_path(question) %></td>
+    <td><%= link_to 'Edit', edit_api_v1_question_path(question) %></td>
+    <td><%= link_to 'Destroy', api_v1_question_path(question), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Question', new_api_v1_question_path %>

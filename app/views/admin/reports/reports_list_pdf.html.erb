@@ -1,0 +1,170 @@
+
+<%= javascript_include_tag "application", "/javascripts/colorpicker/colorpicker","/javascripts/base64","/javascripts/canvas2image" %>
+<script type="text/javascript" charset="utf-8">
+
+  function reload_page(id){
+    location.href="deals?"+ id
+  }
+
+  $(function () {
+    var chart;
+    $(document).ready(function () {
+      $(".datepicker").datepicker({dateFormat: "yy-mm-dd"});
+      chart = new Highcharts.Chart({
+        chart:{
+          renderTo:'graph-container',
+          type:'line',
+          animation: false
+        },
+        title:{
+          text:'Coupons Statistics',
+          x:-20 //center
+        },
+        xAxis:{
+          categories:<%= @graph_x.html_safe %>
+        },
+        yAxis:{
+          title:{
+            text:'Total'
+          },
+          plotLines:[
+            {
+              value:-5,
+              width:1,
+              color:'#808080'
+            }
+          ]
+        },
+        legend:{
+          layout:'vertical',
+          align:'right',
+          verticalAlign:'top',
+          x:-10,
+          y:100,
+          borderWidth:0,
+          navigation: {animation: false}
+        },
+        series:[
+          {
+            name:'Generated',
+            data: <%= @deals_view_users.to_json %>
+          },
+          {
+            name:'Redeemed',
+            data: <%= @redeemed_deals.to_json %>
+
+          }
+        ],
+        plotOptions: { series: { enableMouseTracking: false, shadow: false, animation: false },line: { enableMouseTracking: false, shadow: false, animation: false } }
+      });
+    });
+  });
+</script>
+<style type="text/css">
+  table { text-align: left;
+          font-weight: normal;}
+  td { text-align: left;
+       font-weight: normal;}
+  tr { text-align: left;
+       font-weight: normal;}
+  th { text-align: left;
+       font-weight: normal;}
+  </style>
+<%#*--------------------------------------------------------%>
+  <table>
+    <thead>
+      <tr>
+        <%if params[:q] and params[:q][:id_eq]%>
+          <th><b>Campaign Name:</b></th>
+          <th><b><%= @deal.title %></b></th>
+        <%else%>
+          <th><b>Store Name:</b></th>
+          <th><b><%= current_user.stores.first.name %></b></th>
+        <%end%>
+      </tr>
+      <tr>
+        <th>&nbsp;</th>
+      </tr>
+      <tr>
+        <th><b>Report Period:</b></th>
+        <th><b><%= @current_date_label %></b></th>
+      </tr>
+      <tr>
+        <td id="graph-container" style="width: 600px; height: 300px;"></td>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th><b>Campaign Statistics:</b></th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th>Number of Unique Deals/Coupons Generated:</th>
+      <th><%= count_arr_for @deals_view_users %></th>
+    </tr>
+    <tr>
+      <th>Number of Unique Deals/Coupons Redeemed:</th>
+      <th><%= count_arr_for @redeemed_deals %></th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th><b>Redemption Demographics:</b></th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th><b>By Age Group</b></th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th>12-17</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.age >= 12 and deal.user.age < 18  }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+    <tr>
+      <th>18-34</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.age > 17 and deal.user.age < 35   }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+    <tr>
+      <th>35-44</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.age > 34 and deal.user.age < 45  }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+    <tr>
+      <th>45 and older</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.age >= 45  }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th><b>By Gender</b></th>
+    </tr>
+    <tr>
+      <th>&nbsp;</th>
+    </tr>
+    <tr>
+      <th>Male</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.gender == 'male'  }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+    <tr>
+      <th>female</th>
+      <th><%=number_with_precision(((@graph_deals.collect{|deal| deal.redeemed_deals.select{|deal| deal.user.gender == 'female'  }}.flatten.count.to_f/@graph_deals.collect{|deal| deal.redeemed_deals}.flatten.count.to_f)*100),strip_insignificant_zeros: true,precision: 2)%> %</th>
+    </tr>
+  </thead>
+  <!--
+<%#*<div id="graph-container" style="width: 600px; height: 300px;"></div>%>
+ <tbody>
+    <tr>
+      <td> <%= @user.try(:name) rescue "" %></td>
+      <td><%= count_arr_for @deals_view_users %></td>
+      <td><%= count_arr_for @redeemed_deals %></td>
+    </tr>
+  </tbody> -->
+</table>

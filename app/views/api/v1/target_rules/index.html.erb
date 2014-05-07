@@ -1,0 +1,34 @@
+<h1>Listing api_v1_target_rules</h1>
+
+<table>
+    <tr>
+    <th>Name</th>
+    <th>All allowed? </th>
+    <th>Allowed Ages</th>
+    <th>Gender</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @api_v1_target_rules.each do |api_v1_target_rule| %>
+  <tr>
+    <td><%= api_v1_target_rule.name %></td>
+    <td><%= api_v1_target_rule.all %></td>
+    <td><%= get_age_categories(api_v1_target_rule) %></td>
+    
+    <td><%= get_genders(api_v1_target_rule) %></td>
+    <%#*<td>%>
+      <%#= link_to 'Show', api_v1_target_rule_path(api_v1_target_rule) %>
+    <%#*</td>%>
+    <%#*<td>%>
+        <%#= link_to 'Edit', edit_api_v1_target_rule_path(api_v1_target_rule) %>
+    <%#*</td>%>
+    <td><%= link_to 'Destroy', api_v1_target_rule_path(api_v1_target_rule), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%#= link_to 'New Target rule', new_api_v1_target_rule_path %>

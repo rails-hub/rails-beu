@@ -1,0 +1,65 @@
+
+<%content_for :title, 'beam-e-up | Change Subscription'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    
+    <%= form_for(@subscription_detail, :url => change_subscription_details_path) do |f| %>
+  <% if @subscription_detail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@subscription_detail.errors.count, "error") %> prohibited this Subscription details from being saved:</h2>
+
+      <ul>
+      <% @subscription_detail.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
+ 
+    <div class="panel">
+      <div class="head"><h3>Change Subscription</h3></div>
+      <div class="inside">
+        Choose from One of the following Subscription Plans:<br /><br />
+        <div class="q1">
+          <h4><strong>Plan</strong></h4><br />
+          <% @plan.each do |plan| %>
+          <%= f.radio_button :plan_id, plan.id %><label for="platinum"><%= "#{plan.title} - #{plan.compaigns_per_month} #{'campaigns per month' if plan.compaigns_per_month!= 'Unlimited'}" %></label><br />
+          <%end%>
+          <%#*<input name="subscription" id="platinum" value="platinum" type="radio"/><label for="platinum">Platinum - Unlimited</label><br />%>
+          <%#*<input name="subscription" id="gold" value="gold" type="radio"/><label for="gold">Gold - 15 campaigns per month</label><br />%>
+          <%#*<input name="subscription" id="silver" value="silver" type="radio"/><label for="silver">Silver - 10 campaigns per month</label><br />%>
+          <%#*<input name="subscription" id="bronze" value="bronze" type="radio"/><label for="bronze">Bronze - 5 campaigns per month</label><br />%>
+        </div>
+        <div class="q1">
+          <h4><strong>Pricing</strong></h4><br />
+          <% @plan.each do |plan| %>
+          <label for="platinum">$<%= plan.price %> per month</label><br />
+          <%end%>
+        </div>
+        
+        <div class="clear"></div><br />
+        <div class="divider"></div><br />
+        <%= f.radio_button :service_type, 'self' %><label for="self">Self Service</label>&nbsp;&nbsp;&nbsp;&nbsp;
+        <%= f.radio_button :service_type, 'full' %><label for="full">Full Service</label><br />
+        <%#*<input type="radio" name="service" id="self"/><label for="self">Self Service</label>&nbsp;&nbsp;&nbsp;&nbsp;%>
+        <%#*<input type="radio" name="service" id="full"/><label for="full">Full Service</label><br />%>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <a class="edgyBlueButton nomargin" onClick="window.history.go(-1)">Back</a>
+    <span class="floatRight"><%= f.submit 'Save', :class => "edgyBlueButton nomargin link_button" %></span>
+     
+    <% end %>
+    <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+

@@ -1,0 +1,77 @@
+<%  content_for :title, 'beam-e-up | Contact' %>
+<%  content_for :keywords, '' %>
+<%  content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+<div class="contentInside">
+  <!-- Content goes here-->
+  <div class="panel">
+    <div class="head"><h3>Contact</h3></div>
+    <div class="inside">
+      <div class="q2 borderRight">
+
+        <%= form_for(@contactu) do |f| %>
+          <% if @contactu.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@contactu.errors.count, "error") %> prohibited this contactu from being saved:</h2>
+
+              <ul>
+                <% @contactu.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+          <div class="field">
+            <%= f.label :name %><br />
+            <%= f.text_field :name, :style=>"width:200px;" %>
+          </div>
+          <div class="field">
+            <%= f.label :company %><br />
+            <%= f.text_field :company, :style=>"width:200px;" %>
+          </div>
+          <div class="field">
+            <%= f.label :email %><br />
+            <%= f.text_field :email, :style=>"width:200px;" %>
+          </div>
+          <div class="field">
+            <%= f.label :phone %><br />
+            <%= f.text_field :phone, :style=>"width:200px;" %>
+          </div>
+          <div class="field">
+            <%= f.label :message %><br />
+            <%= f.text_area :message, :cols=>"65", :rows=>"5" %>
+          </div>
+          <div class="actions">
+            <%= f.submit 'Submit', :class => "edgyBlueButton nomargin", :style=>'padding: 6px 11px;' %>
+             
+          </div>
+        <% end %>
+
+   
+        <br />
+      </div>
+
+      <div class="q" style="width:250px;">
+        <h3>Contact Us</h3><br />
+        <strong>Beam-e-up Mobile Inc.</strong><br /><br/>
+        <%#*Widok 8, 00-023 Warsaw, Poland<br /><br />%>
+        <%#*<strong>Tel</strong>: +48 226906805 (9AM &ndash; 5PM Central European Time)<br />%>
+        <%#*<strong>Fax</strong>: +48 222138127<br />%>
+        <strong>E-mail</strong>: contact@beam-e-up.com<br /><br />
+        <strong>Website</strong>: www.beam-e-up.com
+      </div>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+
+  <div class="clear"></div>
+  <!-- Content ends here-->
+</div>
+</div>
+
+
+

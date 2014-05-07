@@ -1,0 +1,66 @@
+
+<%content_for :title, 'beam-e-up | Deal Wizard - 2'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div id="content">
+  <div class="content">
+    <%= render :partial=> 'partials/main_menu' %>
+    <div class="contentInside">
+      <!-- Content goes here-->
+      <div class="panel">
+        <div class="head"><h3>Deal Wizard</h3></div>
+        <div class="inside">
+          <%= form_for(@deals_wizard) do |f| %>
+            <% if @deals_wizard.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(@deals_wizard.errors.count, "error") %> prohibited this deals_wizard from being saved:</h2>
+
+                <ul>
+                <% @deals_wizard.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+                </ul>
+              </div><br/>
+            <% end %>
+          <h5>Objective:</h5><br/>
+          <%  @compaign_objectives.each do |compaing_obj| %>
+          <%= "#{compaing_obj.name}" %><br />
+          <%end%>
+          <br />
+          
+          Deal Options:<br /><br />
+          
+          <div id="offers">
+
+
+          <%= f.hidden_field :compaign_objectives_ids, :value => @comaign_obj_ids %>
+          <%= f.hidden_field :deal_id, :value => session[:deal_id] %>
+
+            <%= f.check_box :fixed_offer %><%= f.label :fixed_offer, 'Buy one, get one free' %><br /><br />
+            <%= f.check_box :buy %><%= f.label :buy%>
+            <%= f.text_field :buy_units , :class=>'c_offer'%>&nbsp;units, get
+            <%= f.text_field :buy_offer , :class=>'c_offer'%> % off your total purchase<br /><br />
+          
+            <%= f.check_box :spend %><%= f.label :spend, 'Spent $'%>
+            <%= f.text_field :spend_amount , :class=>'c_offer'%>&nbsp;, get
+            <%= f.text_field :spend_offer , :class=>'c_offer'%> % off your total purchase<br />
+          </div>
+          
+        </div>
+      </div>
+
+      <a class="edgyBlueButton nomargin" onClick="window.history.go(-1)">Previous</a>
+      <div class="floatRight">
+        <%= f.submit 'Next', :class => "edgyBlueButton nomargin" %>
+      </div>
+      <%end%>
+      <div class="clear"></div>
+      <!-- Content ends here-->
+    </div>
+  </div>
+
+</div><!-- #content-->
+
+

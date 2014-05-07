@@ -1,0 +1,24 @@
+
+<div class="panel">
+  <div class="head"><h3>Manage HotSpots</h3></div>
+  <div class="inside nopadding">
+    <table class="data">
+      <tbody>
+      <% if @admin_hotspots.length>0%>
+      <% @admin_hotspots.each do |admin_hotspot| %>
+          <tr>
+            <td><%= admin_hotspot.name %></td>
+            <td class="textAlignRight">
+            	<%= link_to 'Edit', edit_admin_hotspot_path(admin_hotspot) ,class: "edgyBlueButton" %>
+            	<%= link_to 'Delete', admin_hotspot, method: :delete ,class: "edgyBlueButton", data: { confirm: 'Are you sure?' } %>
+            	</td>
+          </tr>
+      <% end %>       
+      <%else%>
+          &nbsp;&nbsp;&nbsp;&nbsp;<%= "There is no hotspot setup in the system. Please add one to get started."%>
+      <%end%>
+      </tbody>
+    </table>
+  </div>
+  
+</div>

@@ -1,0 +1,60 @@
+
+
+<%content_for :title, 'beam-e-up | My Account'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+
+<div class="content">
+  <%= render :partial=> 'partials/main_menu' %>
+  <div class="contentInside">
+    <!-- Content goes here-->
+    <div class="panel">
+      <div class="head"><h3>My Account</h3></div>
+      <div class="inside">
+        <h3>Account Details</h3>
+        <label class="static"><strong>Business Name</strong>:</label><span style="width:120px; margin-right:40px; display:inline-block;"><%= display_value(@user.business_name) %></span>
+        <label class="static"><strong>Administrator</strong>:</label><span style="width:120px; margin-right:40px; display:inline-block;"><%= display_value(@user.username) %></span>
+        <label class="static"><strong>Phone</strong>:</label><span style="width:120px; display:inline-block;"><%= display_value(@user.mobile) %></span><br />
+
+        <label class="static"><strong>Address</strong>:</label><span style="width:120px; margin-right:40px; display:inline-block;"><%= display_value(@user.address) %></span>
+        <label class="static"><strong>Email</strong>:</label><span style="width:120px; display:inline-block; margin-right:40px;"><%= display_value(@user.email) %></span>
+        <label class="static"><strong>Redemption Code</strong>:</label><span style="width:120px; display:inline-block;"><%= display_value(@user.redemption_code) %></span><br /><br />
+        <% unless current_user.is_admin? %>
+          <label class="static"><strong>Retailer Logo</strong>:</label><span style="width:120px; display:inline-block;"><%= image_tag get_reatailer_pic(@user)  %></span><br /><br />
+        <% end %>
+        <%= link_to 'Edit My Account Information', edit_user_url(current_user.id), :class => "edgyBlueButton nomargin" %><br /><br />
+
+        <!--<div class="divider"></div><br />-->
+        <!--<h3>Subscription</h3>-->
+        
+        <% @user_payments.each do |user_payment| %>
+        <label class="static"><strong>Subscription Plan</strong>:</label><span style="width:120px; margin-right:40px; display:inline-block;"><%= get_plan_type(user_payment.plan) %></span>
+        <label class="static"><strong>Service Level</strong>:</label><span style="width:120px; margin-right:40px; display:inline-block;"><%= get_service_type(user_payment.plan_type) %></span>
+        <label class="static"><strong>Remaining Campaigns</strong>:</label><span style="margin-right:40px; display:inline-block;"><%= get_remaining_campaigns(user_payment) %></span><br /><br />
+        <%end%>
+
+        <%  if @credit_card_information.present? %>
+          <div style="display:none;">
+            <%= render 'credit_card_informations/form' %>
+          </div>
+        <%  end %>
+         <%#= link_to 'Renew Subscription', renew_subscription_user_payments_url, :class => "edgyBlueButton  nomargin"%>
+         <% if @credit_card_information.present? %>
+        <%#*<input type="button" id="credit_card_info" name="credit_card_info" value="Edit/Change Credit Card" class='edgyBlueButton  nomargin' onclick="show_colorbox($(this));"/>%>
+         <%= link_to 'Edit/Change Credit Card', 'javascript:void(0);', :class => "edgyBlueButton  nomargin", :id=>"credit_card_info", :onclick => "show_colorbox($(this));" unless current_user.is_admin? %>
+        <%  else %>
+        <%= link_to 'Edit/Change Credit Card', 'javascript:void(0);', :class => "edgyBlueButton  nomargin" unless current_user.is_admin? %>
+        <%  end %>
+         
+         <%= link_to 'Change Subscription Plan', change_subscription_user_payments_url, :class => "edgyBlueButton" unless current_user.is_admin? %>
+      </div>
+    </div>
+
+   
+    <a class="edgyBlueButton nomargin" onClick="window.history.go(-1)">Back</a>
+    <div class="clear"></div>
+    <!-- Content ends here-->
+  </div>
+</div>
+

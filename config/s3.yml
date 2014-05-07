@@ -1,0 +1,15 @@
+
+
+common: &common
+  access_key_id: AKIAIRGNYZRCG5ZGVY7A
+  secret_access_key: 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
+
+
+development:
+  <<: *common
+  bucket: beu-dev
+  
+
+production:
+  <<: *common
+  bucket: beu-heroku

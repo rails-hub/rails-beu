@@ -1,0 +1,98 @@
+
+
+<%content_for :title, 'beam-e-up | Change Subscription'%>
+<%content_for :keywords, '' %>
+<%content_for :description, '' %>
+
+<div class="content">
+  <%= render :partial => 'partials/main_menu' %>
+
+
+  <div class="contentInside" >
+
+    <div class="panel">
+      <div class="head"><h3>Subscription and Payment</h3></div>
+      <div class="inside">
+        <%=  form_tag(save_renew_subscription_user_payments_url, :id =>'renew_form') do%>
+        <div class="q borderRight" style="width:300px; padding-right:20px;">
+          <br/>
+
+          <h3>Subscribe</h3>
+
+          
+            <%= hidden_field_tag :selected_plan_price, @plan.price %>
+            <label class="static">Subscription Plan: </label><label class="static" id="subPlan"><strong> <%= @plan.title %></strong></label><br/>
+            <label class="static">Subscription Service Level: </label><label class="static" id="subLevel"><strong><%= get_service_type(@plan.plan_type) %></strong></label><br/>
+            <label class="static">Payment Schedule:</label>
+            <div class="clear" style="display:inline-block;">
+
+              <%=  select_tag :term,options_for_select([['Monthly','1'],['Quarterly (3 Months)','3'],['Semi-Annual (6 Months)','6'],['Annual (12 Months)','12']]), :style => "opacity: 0;" %>
+
+            </div><br/>
+            <%= hidden_field_tag :plan_id, @plan.id %>
+            <label class="static">Campaigns Per Month:</label><label class="static" id="campPerMonth"><strong> 5 Campaign</strong></label><br/>
+            <label class="static">Subscription Period: </label><strong> </strong><br/>
+            From:&nbsp;<label class="static"  id="fromdate"><strong> &nbsp; <%= (Time.zone.now).strftime("%d-%m-%Y") %></strong></label>
+            To:&nbsp;<label class="static" style="display:inline" id="todate" ><strong>&nbsp;&nbsp; <%= (Time.zone.now+30.days).strftime("%d-%m-%Y") %> </strong></label><br/>
+            <label class="static">Balance Due: </label>
+            <strong id="dueamount">$0</strong>
+            <input id="payment_amount" name="payment_amount" type="hidden" value="0" />
+            <br/><br/><br/>
+
+
+
+
+          </div>
+
+          <div class="q" style="width:560px; margin-top:-10px; margin-right:0px;">
+            <br/>
+
+            <h3>Payment Options</h3>
+
+            <div class="q" style="width:320px;">
+              <h3>Credit Card</h3>
+              <label class="static" for="name">Name: </label>
+              <input type="text" name="payment_name" id="payment_name" style="width:150px;" class="validate[required] text-input" /><br/><br/>
+              <label class="static" for="cardNumber">Card Number: </label>
+              <input type="text" name="payment_cardNumber" id="payment_cardNumber" style="width:150px;" class="validate[required] text-input"/><br/><br/>
+              <div class="q nomargin custom_selector" >
+                    <label class="static" for="expireDate">Expire Date: </label>
+                  <%=  select_month(Date.today, {:field_name => 'month', :use_month_numbers => true, :prefix=>'expiry'}, {:class=>"preview_change inline"})%>
+                  <%=  select_year(Date.today, { :field_name => 'year', :prefix=>'expiry', :start_year => Time.zone.now.year, :end_year => (Time.zone.now.year + 13)}, {:class=>"preview_change inline"})%>
+              </div>
+              <br/><br/>
+              <div>
+                <div class="checker hover" id="uniform-target_rule_all">
+                  <span>
+                    <input id="payment_agreetopay" name="payment_agreetopay" type="checkbox" value="1" style="opacity: 0;" />
+                  </span>
+                </div>
+                Agree to make a payment</div>
+            </div>
+
+            <div class="q nomargin" style="width:180px;">
+              <h3>PayPal</h3>
+              <a href="#"><%= image_tag '/images/paypal.png', :width => "143", :height => "60", :alt => "PayPal" %></a>
+            </div>
+
+            <div class="clear"></div>
+            <br/>
+          </div>
+        </div>
+
+        <div class="clear"></div>
+      </div>
+
+
+      <%= link_to 'Back', user_path(current_user.id), :class => "edgyBlueButton nomargin" %>
+      <div class="floatRight">
+        <%= submit_tag 'Save', :class => "edgyBlueButton nomargin link_button" %>
+
+        <div class="clear"></div>
+        <div class="clear"></div>
+        <!-- Content ends here-->
+      </div>
+    <%end%>
+
+  </div>
+</div>

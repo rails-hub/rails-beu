@@ -1,0 +1,29 @@
+<h1>Listing categories</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Logo url</th>
+    <th>Rule</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @categories.each do |category| %>
+  <tr>
+    <td><%= category.name %></td>
+    <td><%= category.description %></td>
+    <td><%= category.logo_url %></td>
+    <td><%= category.target_rule_id %></td>
+    <td><%= link_to 'Show', api_v1_category_path(category) %></td>
+    <td><%= link_to 'Edit', edit_api_v1_category_path(category) %></td>
+    <td><%= link_to 'Destroy', api_v1_category_path(category), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Category', new_api_v1_category_path %>
